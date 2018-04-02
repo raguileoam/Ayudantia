@@ -49,7 +49,7 @@ public class objetoEquipable {
 		} else {
 			local_estrella = 10;
 		}
-		return estrella;
+		return local_estrella;
 	}
 	
 	public String azar_caracteristica() { //
