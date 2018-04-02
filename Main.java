@@ -5,7 +5,6 @@ public class Main {
 		try {
 			inventarioLuchadores inventario = new inventarioLuchadores();
 			inventario.agregarLuchador();
-			inventario.mostrarLuchador(0);
 		
 
 		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
