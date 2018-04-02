@@ -1,6 +1,4 @@
 package Ayudantia;
-import java.util.Scanner;
-import java.lang.ArrayIndexOutOfBoundsException;
 public class luchador_AliwenMelillan
 {
 	private String nombre;
@@ -10,35 +8,11 @@ public class luchador_AliwenMelillan
 	private int SPD;
 	private int rango;
 	private String fraccion;
-	String[] nombres = { "Rambo", "Rocky", "John Cena", "Luchin", "Vega", "Ryu", "Ken", "Goku", "Mario", "Luigi",
-			"Putin", "Java", "Python", "Chapolin Colorado" };
-	String[] fracciones = { "Fuego", "Agua", "Tierra" };
+	private objetoEquipable objeto;
 	
-	public static void main (String[] args) throws ArrayIndexOutOfBoundsException
-	{
-	 int op=0;
-	 Scanner sc=new Scanner(System.in);
-	 luchador_AliwenMelillan luchin_1 = new luchador_AliwenMelillan();
-
-	 do{
-		 try {
-			 System.out.println("------------------------------------------------------------");
-			 System.out.println("1) Aleatorizar estadisticas 2) Mostrar estadisticas 0) Salir");
-			 op=sc.nextInt();
-
-			 switch(op) 
-			 {
-			 case 1: 	 luchin_1.random_estadisticas(); 
-			 System.out.println("Luchador con estadisticas randomizadas");break;
-			 case 2: 	 luchin_1.mostrar_estadisticas(); break;
-			 }
-		 }
-		 catch(ArrayIndexOutOfBoundsException e) {
-			 System.out.println("Error, intentelo nuevamente");
-		 }
-	 }
-		 while (op!=0);
-	}
+	public String[] nombres = { "Rambo", "Rocky", "John Cena", "Luchin", "Vega", "Ryu", "Ken", "Goku", "Mario", "Luigi",
+			"Putin", "Java", "Python", "Chapolin Colorado" };
+	public String[] fracciones = { "Fuego", "Agua", "Tierra" };
 	
 	public static int random_num(int min, int max) {
 		int num_generado = (int) (Math.random() * ((max - min) + 1) + min);
@@ -78,17 +52,29 @@ public class luchador_AliwenMelillan
 		DEF = random_num(5, 25);
 		SPD = random_num(10, 100);
 		fraccion = "";
+		this.objeto=new objetoEquipable();;
 	}
 
-	public luchador_AliwenMelillan(String nombre, int rango, int hP, int aTK, int dEF, int sPD, String fraccion) {
+	public luchador_AliwenMelillan(String nombre, int hP, int aTK, int dEF, int sPD, int rango, String fraccion,
+			objetoEquipable objeto) {
 		super();
 		this.nombre = nombre;
-		this.rango = rango;
 		HP = hP;
 		ATK = aTK;
 		DEF = dEF;
 		SPD = sPD;
+		this.rango = rango;
 		this.fraccion = fraccion;
+		this.objeto = objeto;
+	}
+
+
+	public objetoEquipable getObjeto() {
+		return objeto;
+	}
+
+	public void setObjeto(objetoEquipable objeto) {
+		this.objeto = objeto;
 	}
 
 	public String getNombre() {
