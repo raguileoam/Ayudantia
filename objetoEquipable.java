@@ -1,33 +1,24 @@
 package Ayudantia;
-import java.lang.reflect.Field;
 
-import Ayudantia.luchador_AliwenMelillan;
+import Ayudantia.luchador;
 
 public class objetoEquipable {
-	/**
-	 * @param estrella
-	 */
+	
 	private int estrella;
 	private int mejora_base;
 	private String habilidad_mejorada;
+	private String nombre;
 
 	
 	public objetoEquipable() {
 		this.estrella=probabilidad_estrella();
-		this.mejora_base=Ayudantia.luchador_AliwenMelillan.random_num(1, 9)*getEstrella();
+		this.mejora_base=luchador.random_num(1, 9)*getEstrella();
 		this.habilidad_mejorada=azar_caracteristica();
 	}
 
-	public objetoEquipable(int estrella, int mejora_base, String habilidad_mejorada) {
-		super();
-		this.estrella = estrella;
-		this.mejora_base = mejora_base;
-		this.habilidad_mejorada = habilidad_mejorada;
-	}
-
-	public int probabilidad_estrella() {
+	private int probabilidad_estrella() {
 		int local_estrella=0;
-		int probabilidad = luchador_AliwenMelillan.random_num(1, 100);
+		int probabilidad = luchador.random_num(1, 100);
 		if (probabilidad <= 20) {
 			local_estrella = 1;
 		} else if (probabilidad <= 40) {
@@ -52,10 +43,11 @@ public class objetoEquipable {
 		return local_estrella;
 	}
 	
-	public String azar_caracteristica() { //
-		String[] caracteristicas= {"HP","ATK","DEF","SPD"};
-		String caracteristica_elegida;
-		caracteristica_elegida=caracteristicas[Ayudantia.luchador_AliwenMelillan.random_num(0, caracteristicas.length)];
+	private String azar_caracteristica() { //aleatoriza para caracteristica mejorada junto a su respectivo tipo de objeto
+		String[][] caracteristicas= {{"HP","ATK","DEF","SPD"},{"Armadura","Arma","Escudo","Botas"}};
+		int indice_random;
+		String caracteristica_elegida=caracteristicas[0][indice_random=luchador.random_num(0, caracteristicas[0].length-1)];
+		this.setNombre(caracteristicas[1][indice_random]);
 		return caracteristica_elegida;
 	}
 	
@@ -77,10 +69,17 @@ public class objetoEquipable {
 	public String getHabilidad_mejorada() {
 		return habilidad_mejorada;
 	}
-	
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	public void mostrar_caracteristicas() {
 		System.out.println("Mejora base: " + getMejora_base() +
 				"\n Estrellas: " + getEstrella() + "\n Habilidad mejorada: " + getHabilidad_mejorada());	
 	}
+
+
 	
 }
