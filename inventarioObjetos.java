@@ -25,6 +25,9 @@ public class inventarioObjetos {
 	}
 	public void mostrar_objetos() {
 		for (int i=0;i<objetos.size();i++) {
+			System.out.print("Atributo mejorado: "+ objetos.get(i).getHabilidad_mejorada()
+					+ "\n Rango/estrella: "+ objetos.get(i).getEstrella() 
+					+ "\n Mejora Total: " + objetos.get(i).getMejora());
 			
 		}
 	}

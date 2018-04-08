@@ -6,6 +6,7 @@ public class Main {
 			inventarioLuchadores inventario = new inventarioLuchadores();
 			inventario.agregarLuchador();;
 			inventario.mostrarLuchadores();;
+			Monstruo malo = new Monstruo();
 		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
 			main(args);
 		}
