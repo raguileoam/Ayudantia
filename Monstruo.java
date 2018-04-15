@@ -17,7 +17,10 @@ public class Monstruo extends Personaje{ //nombre,hp,atk,def,spd,rango + setters
 		setSpd(luchador.random_num(10, 100)); //SPD
 	}
 	private void crearObjetoDropeable() {
-		objetoDropeable=new objetoEquipable();
+		objetoDropeable=new objetoEquipable();	
+	}
+	public void mostrarObjetoDropeable() {
 		System.out.println("Objeto Dropeable: " + objetoDropeable.getNombre());
 	}
+	
 }

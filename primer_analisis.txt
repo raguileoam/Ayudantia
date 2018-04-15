@@ -1,0 +1,30 @@
+---Ayudantía Programación / Aliwen Melillán---
+Actualmente (15/04/18) la tarea de Ayudantía de Programación consta de 4 relaciones:
+
+1) Luchador - InventarioLuchadores(I.L): 
+   Relacion: Asociación.
+   Navegabilidad: sólo de I.L a Luchador.
+   Rol: I.L contiene ciertos luchadores.
+   Multiplicidad: de 1 a 25 objetos.
+   Detalle: I.L conoce a y puede usar métodos de la clase Luchador, no así al revés.
+
+2) ObjetoEquipable(O.E) - InventarioObjetos (I.O):
+   Relacion: Asociación.
+   Navegabilidad: sólo de I.O a O.E.
+   Rol: I.O contiene ciertos O.E.
+   Multiplicidad: de 0 a 10 objetos.
+   Detalle: I.O conoce a y puede usar métodos de la clase O.E, no así al revés.
+
+3) ObjetoEquipable(O.E) - Monstruo:
+   Relacion: Asociación.
+   Navegabilidad: sólo de Monstruo a ObjetoEquipable.
+   Rol: Monstruo posee un ObjetoEquipable.
+   Multiplicidad: sólo 1 objeto.
+   Detalle: Monstruo conoce a y puede usar métodos de la clase O.E, no así al revés.
+
+4) Monstruo - Personaje:
+   Relacion: Herencia.
+   Multiplicidad: -
+   Rol: Monstruo tiene características heredadas de Personaje.
+   Navegabilidad: de Monstruo a Personaje.
+   Detalle: Monstruo hereda Atributos y métodos set/get de Stats y facción de Personaje. 

@@ -1,29 +1,27 @@
 package Ayudantia;
 
 public class Personaje {
-	private String nombre;
 	private int hp;
 	private int atk;
 	private int def;
 	private int spd;
-	private int rango;
+	private String faccion;
 
 	public Personaje() {
 		super();
-		this.nombre = "";
 		this.hp = 1;
 		this.atk = 1;
 		this.def = 1;
-		this.spd = 1;
-		this.rango=1;
+		this.spd = 1;;
+		this.faccion="";
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getFaccion() {
+		return faccion;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setFaccion(String faccion) {
+		this.faccion = faccion;
 	}
 
 	public int getHp() {
@@ -56,14 +54,6 @@ public class Personaje {
 
 	public void setSpd(int spd) {
 		this.spd = spd;
-	}
-
-	public int getRango() {
-		return rango;
-	}
-
-	public void setRango(int rango) {
-		this.rango = rango;
 	}
 
 	

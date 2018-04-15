@@ -3,12 +3,31 @@ import java.util.ArrayList;
 
 public class inventarioObjetos {
 	private ArrayList<objetoEquipable> objetos;
+	private int max_objetos;
 	
 	public inventarioObjetos() {
 		objetos= new ArrayList<objetoEquipable>();
+		max_objetos=10;
 	}
 	public void agregarObjeto() { //Instancia objeto equipable y lo agrega a objetos
-		objetos.add(new objetoEquipable());
+		if (objetos.size()<=max_objetos) { //Limite de luchadores=25
+			objetos.add(new objetoEquipable());;
+		}	
+		else {
+			System.out.println("Se ha sobrepasado el límite");
+		}
+	}
+	public ArrayList<objetoEquipable> getObjetos() {
+		return objetos;
+	}
+	public void setObjetos(ArrayList<objetoEquipable> objetos) {
+		this.objetos = objetos;
+	}
+	public int getMax_objetos() {
+		return max_objetos;
+	}
+	public void setMax_objetos(int max_objetos) {
+		this.max_objetos = max_objetos;
 	}
 	public void eliminarObjeto(int indice) { //Borra objeto segun indice
 		objetos.remove(indice-1);

@@ -2,9 +2,11 @@ package Ayudantia;
 import java.util.ArrayList;
 public class inventarioLuchadores {
 	private ArrayList<luchador> luchadores;	
+	private int max_luchadores;
 	
 	public inventarioLuchadores() { //Constructor que inicializa la lista de luchadores
 		luchadores=new ArrayList<luchador>();
+		max_luchadores=25;
 	}
 	
 	public ArrayList<luchador> getLuchadores() {
@@ -19,13 +21,21 @@ public class inventarioLuchadores {
 	}
 	
 	public void agregarLuchador() { //Agrega luchador secuencialmente
-		if (luchadores.size()<=25) { //Limite de luchadores=25
+		if (luchadores.size()<=max_luchadores) { //Limite de luchadores=25
 			luchadores.add(new luchador());;
 		}	
 		else {
 			System.out.println("Se ha sobrepasado el límite");
 		}
 	}
+	public int getMax_luchadores() {
+		return max_luchadores;
+	}
+
+	public void setMax_luchadores(int max_luchadores) {
+		this.max_luchadores = max_luchadores;
+	}
+
 	public void eliminarLuchador(int indice) { //Elimina luchador segun su indice [1,...]
 		if (indice<luchadores.size()){
 			luchadores.remove(indice-1);
