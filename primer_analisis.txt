@@ -4,21 +4,21 @@ Actualmente (15/04/18) la tarea de Ayudantía de Programación consta de 4 relacio
 1) Luchador - InventarioLuchadores(I.L): 
    Relacion: Asociación.
    Navegabilidad: sólo de I.L a Luchador.
-   Rol: I.L contiene ciertos luchadores.
-   Multiplicidad: de 1 a 25 objetos.
+   Rol: I.L contiene  ciertos objetos de Luchador en forma de luchadores.
+   Multiplicidad: de 1 a 25 ObjetoEquipable en forma de luchadores.
    Detalle: I.L conoce a y puede usar métodos de la clase Luchador, no así al revés.
 
 2) ObjetoEquipable(O.E) - InventarioObjetos (I.O):
    Relacion: Asociación.
    Navegabilidad: sólo de I.O a O.E.
-   Rol: I.O contiene ciertos O.E.
-   Multiplicidad: de 0 a 10 objetos.
+   Rol: I.O contiene ciertos O.E en forma de objetos.
+   Multiplicidad: de 0 a 10 ObjetoEquipable en forma de objetos.
    Detalle: I.O conoce a y puede usar métodos de la clase O.E, no así al revés.
 
 3) ObjetoEquipable(O.E) - Monstruo:
    Relacion: Asociación.
    Navegabilidad: sólo de Monstruo a ObjetoEquipable.
-   Rol: Monstruo posee un ObjetoEquipable.
+   Rol: Monstruo posee un ObjetoEquipable en forma de ObjetoDropeable.
    Multiplicidad: sólo 1 objeto.
    Detalle: Monstruo conoce a y puede usar métodos de la clase O.E, no así al revés.
 

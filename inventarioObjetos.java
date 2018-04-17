@@ -8,9 +8,12 @@ public class inventarioObjetos {
 	public inventarioObjetos() {
 		objetos= new ArrayList<objetoEquipable>();
 		max_objetos=10;
+		if (objetos.size()<1) { // I.O tiene que tener de 1 a 10
+			agregarObjeto();
+		}
 	}
 	public void agregarObjeto() { //Instancia objeto equipable y lo agrega a objetos
-		if (objetos.size()<=max_objetos) { //Limite de luchadores=25
+		if (objetos.size()<=max_objetos) { //Limite de objetos==10
 			objetos.add(new objetoEquipable());;
 		}	
 		else {
