@@ -7,6 +7,9 @@ public class InventarioLuchadores {
 	public InventarioLuchadores() { //Constructor que inicializa la lista de luchadores
 		luchadores=new ArrayList<Luchador>();
 		max_luchadores=25;
+		if (luchadores.size()<1) { // I.L tiene que tener de 1 a 25 luchadores
+			agregarLuchador();
+		}
 	}
 	
 	public ArrayList<Luchador> getLuchadores() {
