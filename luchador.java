@@ -9,6 +9,7 @@ public class Luchador
 	private int spd;
 	private int rango;
 	private String faccion;
+	//private ObjetoEquipable objeto;
 	
 	public static int random_num(int min, int max) { //Metodo estatico que genera numero aleatorio
 		int num_generado = (int) (Math.random() * ((max - min) + 1) + min);
@@ -117,6 +118,14 @@ public class Luchador
 		this.faccion = faccion;
 	}
 
+	/*public ObjetoEquipable getObjeto() {
+		return objeto;
+	}
+
+	public void setObjeto(ObjetoEquipable objeto) {
+		this.objeto = objeto;
+	}
+*/
 	//------         --------
 	private void random_estadisticas() //Estadisticas aleatorias a partir del constructor con paramentros vacios
 	{
@@ -140,4 +149,6 @@ public class Luchador
 				+"\nFaccion:" + getFaccion());
 		
 	}
+	//Tarea 5 Objeto
+
 }
