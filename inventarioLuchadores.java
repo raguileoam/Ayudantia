@@ -1,18 +1,18 @@
 package Ayudantia;
 import java.util.ArrayList;
-public class inventarioLuchadores {
-	private ArrayList<luchador> luchadores;	
+public class InventarioLuchadores {
+	private ArrayList<Luchador> luchadores;	
 	private int max_luchadores;
 	
-	public inventarioLuchadores() { //Constructor que inicializa la lista de luchadores
-		luchadores=new ArrayList<luchador>();
+	public InventarioLuchadores() { //Constructor que inicializa la lista de luchadores
+		luchadores=new ArrayList<Luchador>();
 		max_luchadores=25;
 	}
 	
-	public ArrayList<luchador> getLuchadores() {
+	public ArrayList<Luchador> getLuchadores() {
 		return luchadores;
 	}
-	public void setLuchadores(ArrayList<luchador> luchadores) {
+	public void setLuchadores(ArrayList<Luchador> luchadores) {
 		this.luchadores = luchadores;
 	}
 
@@ -22,7 +22,7 @@ public class inventarioLuchadores {
 	
 	public void agregarLuchador() { //Agrega luchador secuencialmente
 		if (luchadores.size()<=max_luchadores) { //Limite de luchadores=25
-			luchadores.add(new luchador());;
+			luchadores.add(new Luchador());;
 		}	
 		else {
 			System.out.println("Se ha sobrepasado el límite");

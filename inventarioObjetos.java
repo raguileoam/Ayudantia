@@ -1,12 +1,12 @@
 package Ayudantia;
 import java.util.ArrayList;
 
-public class inventarioObjetos {
-	private ArrayList<objetoEquipable> objetos;
+public class InventarioObjetos {
+	private ArrayList<ObjetoEquipable> objetos;
 	private int max_objetos;
 	
-	public inventarioObjetos() {
-		objetos= new ArrayList<objetoEquipable>();
+	public InventarioObjetos() {
+		objetos= new ArrayList<ObjetoEquipable>();
 		max_objetos=10;
 		if (objetos.size()<1) { // I.O tiene que tener de 1 a 10
 			agregarObjeto();
@@ -14,16 +14,16 @@ public class inventarioObjetos {
 	}
 	public void agregarObjeto() { //Instancia objeto equipable y lo agrega a objetos
 		if (objetos.size()<=max_objetos) { //Limite de objetos==10
-			objetos.add(new objetoEquipable());;
+			objetos.add(new ObjetoEquipable());;
 		}	
 		else {
 			System.out.println("Se ha sobrepasado el límite");
 		}
 	}
-	public ArrayList<objetoEquipable> getObjetos() {
+	public ArrayList<ObjetoEquipable> getObjetos() {
 		return objetos;
 	}
-	public void setObjetos(ArrayList<objetoEquipable> objetos) {
+	public void setObjetos(ArrayList<ObjetoEquipable> objetos) {
 		this.objetos = objetos;
 	}
 	public int getMax_objetos() {

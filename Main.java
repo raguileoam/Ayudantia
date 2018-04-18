@@ -3,7 +3,7 @@ package Ayudantia;
 public class Main {
 	public static void main(String[] args) {
 		try {
-			inventarioLuchadores inventario = new inventarioLuchadores();
+			InventarioLuchadores inventario = new InventarioLuchadores();
 			inventario.agregarLuchador();;
 			inventario.mostrarLuchadores();;
 			Monstruo malo = new Monstruo();

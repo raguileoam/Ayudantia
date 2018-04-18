@@ -1,6 +1,6 @@
 package Ayudantia;
 import java.util.Random;
-public class luchador
+public class Luchador
 {
 	private String nombre;
 	private int hp;
@@ -40,16 +40,16 @@ public class luchador
 		String[] nombres = { "Rambo", "Rocky", "John Cena", "Luchin", "Vega", "Ryu", "Ken", "Goku", "Mario", "Luigi",
 				"Putin", "Java", "Python", "Chapulin Colorado" };
 		String[] facciones = { "Fuego", "Agua", "Tierra" };
-		if (stringPorAleatorizar=="nombres") {
+		if (stringPorAleatorizar.equals("nombres")) {
 			nombre_generado=nombres[rnd.nextInt(nombres.length)];
 		}
-		else if (stringPorAleatorizar=="facciones") {
+		else if (stringPorAleatorizar.equals("facciones")) {
 			nombre_generado=facciones[rnd.nextInt(facciones.length)];
 		}
 		return nombre_generado;
 	}
 
-	public luchador(){ //Constructor con estadisticas bases
+	public Luchador(){ //Constructor con estadisticas bases
 		this.nombre = " ";
 		rango = 0;
 		hp = random_num(200, 500);

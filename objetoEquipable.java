@@ -1,8 +1,8 @@
 package Ayudantia;
 
-import Ayudantia.luchador;
+import Ayudantia.Luchador;
 
-public class objetoEquipable {
+public class ObjetoEquipable {
 	
 	private int estrella;
 	private int mejora;
@@ -10,9 +10,9 @@ public class objetoEquipable {
 	private String nombre;
 
 	
-	public objetoEquipable() {
+	public ObjetoEquipable() {
 		this.estrella=probabilidad_estrella();
-		this.mejora=luchador.random_num(1, 9)*getEstrella(); //mejora base de 1 a 9 * estrella/rango
+		this.mejora=Luchador.random_num(1, 9)*getEstrella(); //mejora base de 1 a 9 * estrella/rango
 		this.habilidad_mejorada="";
 		this.nombre="";
 		azar_caracteristica_y_nombre();
@@ -20,7 +20,7 @@ public class objetoEquipable {
 
 	private int probabilidad_estrella() {
 		int local_estrella=0;
-		int probabilidad = luchador.random_num(1, 100);
+		int probabilidad = Luchador.random_num(1, 100);
 		if (probabilidad <= 20) {
 			local_estrella = 1;
 		} else if (probabilidad <= 40) {
@@ -48,7 +48,7 @@ public class objetoEquipable {
 	private void azar_caracteristica_y_nombre() { //aleatoriza para caracteristica mejorada junto a su respectivo tipo de objeto
 		String[][] caracteristicas= {{"HP","ATK","DEF","SPD"},{"Armadura","Arma","Escudo","Botas"}};
 		int indice_random;
-		this.setHabilidad_mejorada(caracteristicas[0][indice_random=luchador.random_num(0, caracteristicas[0].length-1)]);
+		this.setHabilidad_mejorada(caracteristicas[0][indice_random=Luchador.random_num(0, caracteristicas[0].length-1)]);
 		this.setNombre(caracteristicas[1][indice_random]);
 	}
 	
