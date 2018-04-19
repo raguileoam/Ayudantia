@@ -28,7 +28,7 @@ public class InventarioLuchadores {
 			luchadores.add(new Luchador());;
 		}	
 		else {
-			System.out.println("Se ha sobrepasado el límite");
+			System.out.println("Se ha sobrepasado el lÃ­mite");
 		}
 	}
 	public int getMax_luchadores() {
@@ -44,7 +44,7 @@ public class InventarioLuchadores {
 			luchadores.remove(indice-1);
 		}
 		else {
-			System.out.println("Se ha sobrepasado del tamaño actual del inventario");
+			System.out.println("Se ha sobrepasado del tamaÃ±o actual del inventario");
 		}
 	}
 	
