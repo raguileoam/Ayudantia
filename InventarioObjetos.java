@@ -15,7 +15,7 @@ public class InventarioObjetos {
 			objetos.add(new ObjetoEquipable());;
 		}	
 		else {
-			System.out.println("Se ha sobrepasado el límite");
+			System.out.println("Se ha sobrepasado el lÃ­mite");
 		}
 	}
 	public ArrayList<ObjetoEquipable> getObjetos() {
