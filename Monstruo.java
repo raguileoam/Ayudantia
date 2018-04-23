@@ -128,7 +128,7 @@ public class Monstruo {
 		return indice_OD;
 	}
 	public String toString() {
-		String monstruo=("Monstruo: \n " + "HP: "+getHp()); //algun dia poner mas stats, por el momento sirve solo esto para clase batalla
+		String monstruo=("Monstruo HP: "+getHp());
 		return monstruo;
 	}
 
