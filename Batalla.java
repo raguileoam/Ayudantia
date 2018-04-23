@@ -141,7 +141,7 @@ public class Batalla {
 			System.out.println("Gano monstruo"); //Si ocurre esto no apareceran los hp de los luchadores porque se borraron por comodidad en el metodo ataque
 		}
 		for (int index=0;index<luchones.cantidadLuchadores();index++) {
-		System.out.println("luchador n° "+ (index+1) +": HP " +luchones.getLuchadores().get(index).getHp());
+		System.out.println("luchador n° "+ luchones.getLuchadores().get(index).getNombre() +": HP " +luchones.getLuchadores().get(index).getHp());
 		}
 		System.out.println(monstro.toString());
 	}
