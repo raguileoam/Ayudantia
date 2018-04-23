@@ -5,7 +5,6 @@ public class Test {
 		Batalla batallon=new Batalla();
 		batallon.ataque();
 		batallon.resultado();
-		System.out.println(batallon.getMonstro().getAtk());
 		
 	}
 }

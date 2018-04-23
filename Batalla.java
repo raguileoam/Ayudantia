@@ -100,7 +100,7 @@ public class Batalla {
 	public void turno_monstruo(int i){
 		setDaño_monstruo(i);
 		luchones.getLuchadores().get(i).setHp(luchones.getLuchadores().get(i).getHp() - getDaño_monstruo());
-		System.out.println("Vida luchador" + (i+1) +": "+luchones.getLuchadores().get(i).getHp());
+		System.out.println("Vida luchador " + luchones.getLuchadores().get(i).getNombre() +": "+luchones.getLuchadores().get(i).getHp());
 	}
 
 	public void ataque() {
@@ -141,7 +141,7 @@ public class Batalla {
 			System.out.println("Gano monstruo"); //Si ocurre esto no apareceran los hp de los luchadores porque se borraron por comodidad en el metodo ataque
 		}
 		for (int index=0;index<luchones.cantidadLuchadores();index++) {
-		System.out.println("luchador n° "+ luchones.getLuchadores().get(index).getNombre() +": HP " +luchones.getLuchadores().get(index).getHp());
+		System.out.println("luchador "+ luchones.getLuchadores().get(index).getNombre() +": HP " +luchones.getLuchadores().get(index).getHp());
 		}
 		System.out.println(monstro.toString());
 	}
