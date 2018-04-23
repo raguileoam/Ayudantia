@@ -10,7 +10,7 @@ public class ObjetoEquipable {
 	private String nombre;
 
 	public ObjetoEquipable() {
-		String[][] caracteristicas = { { "HP", "ATK", "DEF", "SPD" }, { "Armadura", "Arma", "Escudo", "Botas" } };
+		String[][] caracteristicas = { { "hp", "atk", "def", "spd" }, { "Armadura", "Arma", "Escudo", "Botas" } };
 		this.estrella = probabilidad_estrella();
 		this.mejora = Luchador.random_num(1, 9) * getEstrella(); // mejora base de 1 a 9 * estrella/rango
 		this.habilidad_mejorada = "";
@@ -18,9 +18,9 @@ public class ObjetoEquipable {
 		azar_caracteristica_y_nombre(caracteristicas, Luchador.random_num(0, caracteristicas[0].length - 1));
 	}
 
-	public ObjetoEquipable(int estrella) {
+	public ObjetoEquipable(int estrella) { //en el caso de objeto dropeable  de monstruo
 		super();
-		String[][] caracteristicas = { { "HP", "ATK", "DEF", "SPD" }, { "Armadura", "Arma", "Escudo", "Botas" } };
+		String[][] caracteristicas = { { "hp", "atk", "def", "spd" }, { "Armadura", "Arma", "Escudo", "Botas" } };
 		this.estrella = estrella;
 		this.mejora = Luchador.random_num(1, 9) * getEstrella();
 		this.habilidad_mejorada = " ";

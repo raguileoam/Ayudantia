@@ -1,0 +1,49 @@
+---Ayudantía Programación / Aliwen Melillán---
+Actualmente (22/04/18) la tarea de Ayudantía de Programación consta de 3 relaciones:
+
+1) Luchador - InventarioLuchadores(I.L): 
+   Relacion: Composición.
+   Navegabilidad: sólo de I.L a Luchador.
+   Rol: I.L contiene  ciertos objetos de Luchador en forma de luchadores.
+   Multiplicidad: de 1 a 25 ObjetoEquipable en forma de luchadores.
+   Detalle: I.L está compuesta por clase Luchador, si los luchadores desaparecen deja de ser inventario.
+
+2) ObjetoEquipable(O.E) - InventarioObjetos (I.O):
+   Relacion: Composion.
+   Navegabilidad: sólo de I.O a O.E.
+   Rol: I.O contiene ciertos O.E en forma de objetos.
+   Multiplicidad: de 0 a 10 ObjetoEquipable en forma de objetos.
+   Detalle: I.O está compuesta por la clase O.E, si los objetos desaparecen deja de ser inventario de objetos.
+
+3) ObjetoEquipable(O.E) - Monstruo:
+   Relacion: Agregación.
+   Navegabilidad: sólo de Monstruo a ObjetoEquipable.
+   Rol: Monstruo posee ObjetoEquipable en forma de ObjetoDropeable.
+   Multiplicidad: 3 objetos.
+   Detalle: ObjetoDropeable es parte de monstruo.
+
+4) ObjetoEquipable(O.E) - Luchador:
+   Relacion: Agregación.
+   Navegabilidad: sólo de Luchador a ObjetoEquipable.
+   Rol: Luchador posee un ObjetoEquipable en forma de Objeto.
+   Multiplicidad: sólo 1 objeto.
+   Detalle: ObjetoDropeable es parte de Luchador.
+5) Batalla - InventarioLuchadores(I.L)
+   Relación: Asociación
+   Navegabilidad: solo de Batalla a I.L
+   Rol: Batalla conoce y usa a I.L como sus luchadores(aca luchones). Luchadores no conoce Batalla.
+   Multiplicidad: 1 (de 1 a 6 luchadores)
+   Detalle: Luchador es asociado a Batalla
+6) Batalla - Monstruo
+   Relación: Asociación
+   Navegabilidad: solo de Batalla a Monstruo
+   Rol: Batalla conoce y usa a monstruo(aca monstro). Monstruo no conoce Batalla.
+   Multiplicidad:1
+   Detalle: Monstruo es asociado a Batalla
+7) Batalla - dados
+   Relación: Dependecia
+   Navegabilidad: solo de Batalla a dados.
+   Rol: Batalla usa dado.
+   Multiplicidad: usa dos dados.
+   Detalle: 
+ 

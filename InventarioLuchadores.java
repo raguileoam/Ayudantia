@@ -9,9 +9,8 @@ public class InventarioLuchadores {
 	public InventarioLuchadores() { // Constructor que inicializa la lista de luchadores
 		luchadores = new ArrayList<Luchador>();
 		max_luchadores = 25;
-		if (luchadores.size() < 1) { // I.L tiene que tener de 1 a 25 luchadores
-			agregarLuchador();
-		}
+		// I.L tiene que tener de 1 a 25 luchadores
+		agregarLuchador();
 	}
 
 	public ArrayList<Luchador> getLuchadores() {
@@ -22,16 +21,17 @@ public class InventarioLuchadores {
 		this.luchadores = luchadores;
 	}
 
-	public void cantidadLuchadores() {
-		System.out.println(luchadores.size());
+	public int cantidadLuchadores() {
+		return luchadores.size();
 	}
 
 	public void agregarLuchador() { // Agrega luchador secuencialmente
 		if (luchadores.size() <= max_luchadores) { // Limite de luchadores=25
 			luchadores.add(new Luchador());
 			;
-		} else {
-			System.out.println("Se ha sobrepasado el límite");
+		} 
+		else {
+			System.out.println("Se ha sobrepasado el limite");
 		}
 	}
 

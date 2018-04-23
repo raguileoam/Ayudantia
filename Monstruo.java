@@ -98,15 +98,38 @@ public class Monstruo {
 	}
 
 	private void crearObjetosDropeables() {
+		objetoDropeable=new ObjetoEquipable[3];
 		objetoDropeable[0] = new ObjetoEquipable(1);
 		objetoDropeable[1] = new ObjetoEquipable(3);
-		objetoDropeable[0] = new ObjetoEquipable(5);
+		objetoDropeable[2] = new ObjetoEquipable(5);
 	}
 
 	public void mostrarObjetoDropeables() {
 		for (int i = 0; i < objetoDropeable.length; i++) {
 			System.out.println("Objeto Dropeable: " + objetoDropeable[i].getNombre());
 		}
+	}
+	public ObjetoEquipable dropearObjeto() { //esto no deberia ir aqui...
+		ObjetoEquipable objetoDropeado=objetoDropeable[probabilidadDropeo()];
+		return objetoDropeado;
+	}
+	private int probabilidadDropeo() {
+		int indice_OD=0; //OD=objetoDropeable 
+		int probabilidad = Luchador.random_num(0, 100);
+		if (probabilidad<=60) {
+			indice_OD=0;
+		}
+		else if(probabilidad<=90){
+			indice_OD=1;
+		}
+		else {
+			indice_OD=2;
+		}
+		return indice_OD;
+	}
+	public String toString() {
+		String monstruo=("Monstruo: \n " + "HP: "+getHp()); //algun dia poner mas stats, por el momento sirve solo esto para clase batalla
+		return monstruo;
 	}
 
 }

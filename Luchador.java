@@ -7,8 +7,8 @@ public class Luchador {
 	private double hp;
 	private double atk;
 	private double def;
-	private int spd;
-	private int rango;
+	private double spd;
+	private double rango;
 	private String faccion;
 	private String faccion_favorable;
 	private String faccion_desfavorable;
@@ -25,13 +25,17 @@ public class Luchador {
 		int rango = 0;
 		if (probabilidad <= 40) {
 			rango = 1;
-		} else if (probabilidad <= 70) {
+		}
+		else if (probabilidad <= 70) {
 			rango = 2;
-		} else if (probabilidad <= 85) {
+		} 
+		else if (probabilidad <= 85) {
 			rango = 3;
-		} else if (probabilidad <= 95) {
+		} 
+		else if (probabilidad <= 95) {
 			rango = 4;
-		} else if (probabilidad <= 100) {
+		} 
+		else{
 			rango = 5;
 		}
 		return rango;
@@ -100,19 +104,19 @@ public class Luchador {
 		this.def = def;
 	}
 
-	public int getSpd() {
+	public double getSpd() {
 		return spd;
 	}
 
-	public void setSpd(int spd) {
+	public void setSpd(double spd) {
 		this.spd = spd;
 	}
 
-	public int getRango() {
+	public double getRango() {
 		return rango;
 	}
 
-	public void setRango(int rango) {
+	public void setRango(double rango) {
 		this.rango = rango;
 	}
 
@@ -151,7 +155,7 @@ public class Luchador {
 	// ------ --------
 	private void random_estadisticas() // Estadisticas aleatorias a partir del constructor con paramentros vacios
 	{
-		setNombre(random_string("nombres"));
+		setNombre(random_string("nombres"));		
 		setRango(probabilidad_rango());
 		setHp(getHp() * getRango());
 		setAtk(getAtk() * getRango());
@@ -169,5 +173,18 @@ public class Luchador {
 
 	public void equipar_objeto() {
 		setObjeto(new ObjetoEquipable());
+		if(objeto.getHabilidad_mejorada()=="atk") {
+			setAtk(getAtk()+objeto.getMejora());
+		}
+		else if(objeto.getHabilidad_mejorada()=="def") {
+			setDef(getDef()+objeto.getMejora());
+		}
+		else if(objeto.getHabilidad_mejorada()=="spd") {
+			setSpd(getSpd()+objeto.getMejora());
+		}
+		else if(objeto.getHabilidad_mejorada()=="hp") {
+			setHp(getHp()+objeto.getMejora());
+		}
+		
 	}
 }
