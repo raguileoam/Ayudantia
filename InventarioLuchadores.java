@@ -2,6 +2,7 @@ package Ayudantia;
 
 import java.util.ArrayList;
 
+
 public class InventarioLuchadores {
 	private ArrayList<Luchador> luchadores;
 	private int max_luchadores;
@@ -89,7 +90,10 @@ public class InventarioLuchadores {
 		if (indice > luchadores.size()) {
 			System.out.println("El luchador no existe");
 		} else {
-			luchadores.get(indice - 1).mostrar_estadisticas();
+			System.out.println("Luchador "+luchadores.get(indice).mostrar_estadisticas());
 		}
 	}
+
+	
+
 }

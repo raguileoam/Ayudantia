@@ -128,8 +128,8 @@ public class Monstruo {
 		return indice_OD;
 	}
 	public String toString() {
-		String monstruo=("Monstruo HP: "+getHp());
-		return monstruo;
+		return("Monstruo \tHP:" + getHp() + "\tATK:" + getAtk()
+		+ "\tDEF:" + getDef() + "\tSPD:" + getSpd() + "\tFaccion:" + getFaccion());
 	}
 
 }

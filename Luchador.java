@@ -1,5 +1,6 @@
 package Ayudantia;
 
+import java.util.Comparator;
 import java.util.Random;
 
 public class Luchador {
@@ -165,9 +166,9 @@ public class Luchador {
 
 	}
 
-	public void mostrar_estadisticas() { // Muestra estadisticas
-		System.out.println("Nombre: " + getNombre() + "\nRango:" + getRango() + "\nHP:" + getHp() + "\nATK:" + getAtk()
-				+ "\nDEF:" + getDef() + "\nSPD:" + getSpd() + "\nFaccion:" + getFaccion());
+	public String mostrar_estadisticas() { // Muestra estadisticas
+		return("Nombre: " + getNombre() + "\tRango:" + getRango() + "\tHP:" + getHp() + "\tATK:" + getAtk()
+				+ "\tDEF:" + getDef() + "\tSPD:" + getSpd() + "\tFaccion:" + getFaccion());
 
 	}
 
@@ -187,4 +188,10 @@ public class Luchador {
 		}
 		
 	}
+	
+}
+class orden implements Comparator<Luchador> {
+    public int compare(Luchador l1, Luchador l2) {
+        return (int) (l2.getSpd() - l1.getSpd());
+    }
 }
