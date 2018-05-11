@@ -2,18 +2,11 @@ package Ayudantia;
 
 import java.util.Random;
 
-public class Monstruo {
-	private double hp;
-	private double atk;
-	private double def;
-	private int spd;
-	private String faccion;
+public class Monstruo extends Personaje{
 	private ObjetoEquipable[] objetoDropeable;
-	private String faccion_favorable;
-	private String faccion_desfavorable;
 
 	public Monstruo() {
-		super();
+		super(0,0,0,0,"");
 		crearMonstruo();
 		crearObjetosDropeables();
 		// TODO Auto-generated constructor stub
@@ -39,62 +32,6 @@ public class Monstruo {
 
 	public void setObjetoDropeable(ObjetoEquipable[] objetoDropeable) {
 		this.objetoDropeable = objetoDropeable;
-	}
-
-	public String getFaccion_favorable() {
-		return faccion_favorable;
-	}
-
-	public void setFaccion_favorable(String faccion_favorable) {
-		this.faccion_favorable = faccion_favorable;
-	}
-
-	public String getFaccion_desfavorable() {
-		return faccion_desfavorable;
-	}
-
-	public void setFaccion_desfavorable(String faccion_desfavorable) {
-		this.faccion_desfavorable = faccion_desfavorable;
-	}
-
-	public String getFaccion() {
-		return faccion;
-	}
-
-	public void setFaccion(String faccion) {
-		this.faccion = faccion;
-	}
-
-	public double getHp() {
-		return hp;
-	}
-
-	public void setHp(double hp) {
-		this.hp = hp;
-	}
-
-	public double getAtk() {
-		return atk;
-	}
-
-	public void setAtk(double atk) {
-		this.atk = atk;
-	}
-
-	public double getDef() {
-		return def;
-	}
-
-	public void setDef(double def) {
-		this.def = def;
-	}
-
-	public int getSpd() {
-		return spd;
-	}
-
-	public void setSpd(int spd) {
-		this.spd = spd;
 	}
 
 	private void crearObjetosDropeables() {

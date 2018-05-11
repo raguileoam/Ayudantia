@@ -3,16 +3,9 @@ package Ayudantia;
 import java.util.Comparator;
 import java.util.Random;
 
-public class Luchador {
+public class Luchador extends Personaje{
 	private String nombre;
-	private double hp;
-	private double atk;
-	private double def;
-	private double spd;
 	private double rango;
-	private String faccion;
-	private String faccion_favorable;
-	private String faccion_desfavorable;
 	private ObjetoEquipable objeto;
 
 	public static int random_num(int min, int max) { // Metodo estatico que genera numero aleatorio
@@ -62,13 +55,8 @@ public class Luchador {
 	}
 
 	public Luchador() { // Constructor con estadisticas bases
+		super(random_num(200, 500),random_num(20, 70),random_num(5, 25),random_num(10, 100),"");
 		this.nombre = " ";
-		rango = 0;
-		hp = random_num(200, 500);
-		atk = random_num(20, 70);
-		def = random_num(5, 25);
-		spd = random_num(10, 100);
-		faccion = "";
 		random_estadisticas();
 	}
 
@@ -81,53 +69,6 @@ public class Luchador {
 		this.nombre = nombre;
 	}
 
-	public double getHp() {
-		return hp;
-	}
-
-	public void setHp(double hp) {
-		this.hp = hp;
-	}
-
-	public double getAtk() {
-		return atk;
-	}
-
-	public void setAtk(double atk) {
-		this.atk = atk;
-	}
-
-	public double getDef() {
-		return def;
-	}
-
-	public void setDef(double def) {
-		this.def = def;
-	}
-
-	public double getSpd() {
-		return spd;
-	}
-
-	public void setSpd(double spd) {
-		this.spd = spd;
-	}
-
-	public double getRango() {
-		return rango;
-	}
-
-	public void setRango(double rango) {
-		this.rango = rango;
-	}
-
-	public String getFaccion() {
-		return faccion;
-	}
-
-	public void setFaccion(String faccion) {
-		this.faccion = faccion;
-	}
 
 	public ObjetoEquipable getObjeto() {
 		return objeto;
@@ -136,22 +77,15 @@ public class Luchador {
 	public void setObjeto(ObjetoEquipable objeto) {
 		this.objeto = objeto;
 	}
-
-	public String getFaccion_favorable() {
-		return faccion_favorable;
+	
+	public double getRango() {
+		return rango;
 	}
 
-	public void setFaccion_favorable(String faccion_favorable) {
-		this.faccion_favorable = faccion_favorable;
+	public void setRango(double rango) {
+		this.rango = rango;
 	}
 
-	public String getFaccion_desfavorable() {
-		return faccion_desfavorable;
-	}
-
-	public void setFaccion_desfavorable(String faccion_desfavorable) {
-		this.faccion_desfavorable = faccion_desfavorable;
-	}
 
 	// ------ --------
 	private void random_estadisticas() // Estadisticas aleatorias a partir del constructor con paramentros vacios

@@ -1,5 +1,10 @@
 package Ayudantia;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.ListIterator;
+
 public class Batalla {
 	private InventarioLuchadores luchones;
 	private Monstruo monstro;
@@ -12,6 +17,7 @@ public class Batalla {
 		luchones = new InventarioLuchadores();
 		monstro = new Monstruo();
 		random_num_luchadores();
+		orden();
 		estado();
 		multi_daño=dados();
 		caso_faccion_luchadores();
@@ -25,7 +31,7 @@ public class Batalla {
 	}
 		return boleano;
 	}
-	public boolean end() {
+	public boolean isEnd() {
 		if(luchadores_muertos() || monstro.getHp()<0) {
 			end=true;
 		}
@@ -145,22 +151,28 @@ public class Batalla {
 	}
 	                      
 	public void ataque() {
-		while (end==false) {
-			for (int i = 0; i < luchones.cantidadLuchadores(); i++) {
-				if (luchones.getLuchadores().get(i).getSpd() > monstro.getSpd()) {
-						turno_luchador(i);
-						turno_monstruo(i);
-
-				} else {
-					turno_monstruo(i);
-					turno_luchador(i);
-
-				}
+		int round = 0;
+		ListIterator<Luchador> itr=luchones.getLuchadores().listIterator();
+		while (end == false) {
+			while(itr.hasNext() ) {
+				round = round + 1;
+				System.out.println("ROUND " + round + "\n-----------------------");
+			
 			}
-			end();
+			isEnd();
 		}
 	}
-
+	public void orden() {
+		ArrayList<Object> o=new ArrayList<Object>();
+		Collections.sort(luchones.getLuchadores(), new orden());
+		for (int i=0;i<luchones.getLuchadores().size();i++) {
+			o.add(luchones.getLuchadores().get(i));
+		if(monstro.getSpd()>luchones.getLuchadores().get(i).getSpd()) {
+			o.add(monstro);
+		}
+		}
+	}
+	
 	public void resultado() {
 		if(monstro.getHp()<=0) {
 			//monstro.setHp(0);
@@ -174,7 +186,7 @@ public class Batalla {
 	public void estado() {
 		System.out.println("----------");
 		for (int index=0;index<luchones.cantidadLuchadores();index++) {
-		System.out.println("luchador "+ luchones.getLuchadores().get(index).getNombre() +": HP " +luchones.getLuchadores().get(index).getHp());
+		luchones.mostrarLuchador(index);
 		}
 		System.out.println(monstro.toString());
 		System.out.println("----------");
