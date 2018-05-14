@@ -1,7 +1,6 @@
 package Ayudantia;
 import java.util.ArrayList;
-
-public class InventarioLuchadores {
+public class InventarioLuchadores{
 	private ArrayList<Luchador> luchadores;
 	private int max_luchadores;
 
