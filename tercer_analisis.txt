@@ -1,8 +1,7 @@
----AyudantÌa ProgramaciÛn / Aliwen Melill·n---
- -Tercer an·lisis - Relaciones de herencia-
+---Ayudant√≠a Programaci√≥n / Aliwen Melill√°n---
+ -Tercer an√°lisis - Relaciones de herencia-
 Se encontraron dos relaciones de herencia importantes:
 1) Luchador - Personaje
 2) Monstruo - Personaje
-Razones: Luchador y Monstruo compartian atributos en com˙n:los "stats" (excepto el rango) que son propios de algo m·s global,un personaje de juego.Visto de otro modo, una clase Personaje con sus stats podian especializarse en algo m·s concreto, los cuales son los luchadores y los monstruos. 
-
-No se identificÛ a InventarioLuchadores e InventarioObjetos como especializaciones de una posible clase Inventario dado que no aportan mucho al cÛdigo(solo tienen dos atributos, uno que define la cantidad m·xima de un arreglo de clase y el mismo arreglo de clase)
+Razones: Luchador y Monstruo compartian atributos en com√∫n:los "stats" (excepto el rango) que son propios de algo m√°s global,un personaje de juego.Visto de otro modo, una clase Personaje con sus stats podian especializarse en algo m√°s concreto, los cuales son los luchadores y los monstruos. 
+Tambi√©n est√° InventarioLuchadores e InventarioObjetos como especializaciones de una posible clase Inventario pero no aporta mucho al codigo dado que solo tienen en comun una cantidad l√≠mite de agregados en su ArrayList y estos ArrayList no son del mismo tipo.
