@@ -1,194 +1,136 @@
 package Ayudantia;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.ListIterator;
+import java.util.Comparator;
+import java.util.Random;
+
 
 public class Batalla {
-	private InventarioLuchadores luchones;
-	private Monstruo monstro;
-	private double multi_daño;
-	private double daño_luchadores;
-	private double daño_monstruo;
 	private boolean end;
+	private Monstruo monstro;
+	private InventarioLuchadores luchones;
+	private double ef_dados;
+	private int turno;
+	
 	public Batalla() {
-		super();
-		luchones = new InventarioLuchadores();
-		monstro = new Monstruo();
-		random_num_luchadores();
-		orden();
-		estado();
-		multi_daño=dados();
-		caso_faccion_luchadores();
-		caso_faccion_montruo();
-		end =false;
-	}
-	public boolean luchadores_muertos(){
-		boolean boleano = true;
-		for (int i=0;i<luchones.cantidadLuchadores();i++) {
-		boleano= boleano && luchones.getLuchadores().get(i).getHp()<=0;
-	}
-		return boleano;
-	}
-	public boolean isEnd() {
-		if(luchadores_muertos() || monstro.getHp()<0) {
-			end=true;
-		}
-		return end;
-	}
-	public InventarioLuchadores getLuchones() {
-		return luchones;
-	}
-
-	public Monstruo getMonstro() {
-		return monstro;
-	}
-
-	public void setLuchones(InventarioLuchadores luchones) {
-		this.luchones = luchones;
-	}
-
-	public void setMonstro(Monstruo monstro) {
-		this.monstro = monstro;
-	}
-	public void setDaño_luchadores(int indice_luchador) {
-	
-		this.daño_luchadores = (luchones.getLuchadores().get(indice_luchador).getAtk() - monstro.getDef());
-		if (daño_luchadores < 0) {
-			daño_luchadores = 0;
-		}
-		
-	}
-
-	public void setDaño_monstruo(int indice_luchador) {
-		this.daño_monstruo = (monstro.getAtk() - luchones.getLuchadores().get(indice_luchador).getDef());
-		if (daño_monstruo < 0) {
-			daño_monstruo = 0;
-		}
-	}
-
-	public double getDaño_monstruo() {
-		return daño_monstruo;
-	}
-
-	public double getDaño_luchadores() {
-		return daño_luchadores;
+	this.monstro=new Monstruo();
+	this.luchones=new InventarioLuchadores();
+	crearLuchadores();
+	this.ef_dados=dados();
+	this.turno=0;
+	estado();
 	}
 	
-	private void random_num_luchadores() {
-		int num_luchadores = Ayudantia.Luchador.random_num(0, 5); // En el caso luchador v/s montruo de tarea5 se pueden de 1 a 6 luchadores, como 1 se crea automaticamente el max es 5 y el min 0
-		for (int i = 0; i < num_luchadores; i++) { //OJO el num luchadores no es lo mismo que el indice del luchador, si el numluchadores es 0 no (se deberia) se crean luchadores
+	private void crearLuchadores() {
+		int num=new Random().nextInt(6); //Se crea uno automaticamente
+		for (int i = 0; i < num; i++) { //OJO el num luchadores no es lo mismo que el indice del luchador, si el numluchadores es 0 no (se deberia) se crean luchadores
 			luchones.agregarLuchador();
-			
 		}
 	}
-	
-	private int dados() {
+	public void estado() {
+		System.out.println("----------");
+		luchones.mostrarLuchadores();
+		System.out.println(monstro);
+		System.out.println("----------");
+	}
+	private double dados() {
 		Dado dadito4 = new Dado();
 		Dado dadito8 = new Dado();
 		dadito4.lanza_dado(4);
 		dadito8.lanza_dado(6);
-		int valor = dadito8.getNumero() - dadito4.getNumero();
+		double valor = dadito8.getNumero() - dadito4.getNumero();
+		if (valor>0) {
+			System.out.println("El daño que hagan tus personajes se multiplicará por " +valor);
+		}
+		else if(valor<0){
+			valor=Math.abs(valor);
+			System.out.println("El daño que le hagan a tus personajes se multiplicará por " +valor);
+		}	
+		else {
+			valor=1;
+			System.out.println("No hay bonificación de daño ");
+		}
 		return valor;
 	}
-
-	private void casos_daño() {
-		if (multi_daño > 0) {
-			daño_luchadores=daño_luchadores*multi_daño;
-		} else if (multi_daño < 0) {
-			daño_monstruo=daño_monstruo*Math.abs(multi_daño);
-		} 
-	}
-
-	public void caso_faccion_luchadores() {
-		for (int i= 0; i < luchones.cantidadLuchadores(); i++) {
-			if (luchones.getLuchadores().get(i).getFaccion().equals(monstro.getFaccion_desfavorable())) {
-				luchones.getLuchadores().get(i).setAtk(luchones.getLuchadores().get(i).getAtk() * 1.5); // favorable para luchador
-			} else if (luchones.getLuchadores().get(i).getFaccion().equals(monstro.getFaccion_favorable())) {
-				luchones.getLuchadores().get(i).setAtk(luchones.getLuchadores().get(i).getAtk() * 0.75); // desfavorable para luchador
-			}
-		}
-	}
-
-	public void caso_faccion_montruo() {
-		for (int indice_luchadores = 0; indice_luchadores < luchones.cantidadLuchadores(); indice_luchadores++) {
-			if (monstro.getFaccion().equals(luchones.getLuchadores().get(indice_luchadores).getFaccion_desfavorable())) {
-				monstro.setAtk(monstro.getAtk() * 1.5); // favorable para monstruo
-			} else if (monstro.getFaccion().equals(luchones.getLuchadores().get(indice_luchadores).getFaccion_favorable())) {
-				monstro.setAtk(monstro.getAtk() * 0.75); // desfavorable para monstruo
-			}
-		}
-	}
-	public void turno_luchador(int i) {
-		if (luchones.getLuchadores().get(i).getHp() > 0 && monstro.getHp()>0) {		
-			setDaño_luchadores(i);
-			casos_daño();
-			String luchador = luchones.getLuchadores().get(i).getNombre();
-			double vida = monstro.getHp() - getDaño_luchadores();
-			monstro.setHp(vida);
-			System.out.println(luchador + " ataca " + daño_luchadores);
-			if(monstro.getHp()<0) {
-				monstro.setHp(0);
-			}
-			System.out.println("Vida monstruo: " + monstro.getHp());
-		}
-	
-	}
-	
-	public void turno_monstruo(int i){
-		if(monstro.getHp()>0 && luchones.getLuchadores().get(i).getHp() > 0) {
-		setDaño_monstruo(i);
-		casos_daño();
-		double vida=luchones.getLuchadores().get(i).getHp() - getDaño_monstruo();
-		luchones.getLuchadores().get(i).setHp(vida);
-		System.out.println("Monstruo ataca "+getDaño_monstruo() );
-		if(luchones.getLuchadores().get(i).getHp()<0) {
-			luchones.getLuchadores().get(i).setHp(0);
-		}
-		System.out.println("Vida luchador " + luchones.getLuchadores().get(i).getNombre() +": "+luchones.getLuchadores().get(i).getHp());
-		}
-	}
-	                      
-	public void ataque() {
-		int round = 0;
-		ListIterator<Luchador> itr=luchones.getLuchadores().listIterator();
-		while (end == false) {
-			while(itr.hasNext() ) {
-				round = round + 1;
-				System.out.println("ROUND " + round + "\n-----------------------");
+	private double caso_faccion(Personaje a,Personaje b) {
+		double ef_faccion=1;
+		if(a.getFaccion().equals(b.getFaccion_desfavorable())) {
+			ef_faccion=1.50;
 			
+		}
+		else if(a.getFaccion().equals(b.getFaccion_favorable())) {
+			ef_faccion=0.75;
+		}
+		return ef_faccion;
+	}
+	public void ataque(Personaje atacante,Personaje atacado) {
+		double daño=0;
+		if (atacante.getHp()>0 && atacado.getHp()>0) {
+			daño=atacante.getAtk()*caso_faccion(atacante,atacado)-atacado.getDef();
+			daño=daño*ef_dados;
+			if(daño<0) {
+				daño=0;
+				System.out.println("No hay daño");
+				}
+			else {
+				System.out.println(atacante.getNombre() + " ha atacado a " + atacado.getNombre() +" dañandolo en " + daño);
+				atacado.setHp(atacado.getHp()-daño);
+				if (atacado.getHp()<0) {
+					atacado.setHp(0);
+				}
+				}
 			}
-			isEnd();
+		}
+	public boolean isEnd() {
+		if(isDead_luchadores() || monstro.getHp()<=0) {
+			end=true;
+			}
+		return end;
+		}
+	private boolean isDead_luchadores(){
+		boolean boleano = true;
+		for (int i=0;i<luchones.cantidadLuchadores();i++) {
+			boleano= boleano && luchones.getLuchadores().get(i).getHp()<=0;
+			}
+		return boleano;
+		}
+	public void turno() {
+		turno+=1;
+		for (int ordenSPD = 0; ordenSPD < luchones.cantidadLuchadores() + 1; ordenSPD++) {
+			for (int indice = 0; indice < luchones.cantidadLuchadores(); indice++) {
+				if (indiceSPD(luchones.getLuchadores().get(indice)) == ordenSPD) {
+					ataque(luchones.getLuchadores().get(indice), monstro);
+					break;
+				} else if (indiceSPD(monstro) == ordenSPD) {
+					if(luchones.getLuchadores().get(indice).getHp()>0) {
+						ataque(monstro, luchones.getLuchadores().get(indice));
+					break;
+					}
+				}
+			}
 		}
 	}
-	public void orden() {
-		ArrayList<Object> o=new ArrayList<Object>();
-		Collections.sort(luchones.getLuchadores(), new orden());
-		for (int i=0;i<luchones.getLuchadores().size();i++) {
-			o.add(luchones.getLuchadores().get(i));
-		if(monstro.getSpd()>luchones.getLuchadores().get(i).getSpd()) {
-			o.add(monstro);
-		}
+	public int indiceSPD(Personaje s) {
+		ArrayList<Personaje> spdd = new ArrayList<Personaje>();
+		spdd.addAll(luchones.getLuchadores());
+		spdd.add(monstro);
+		spdd.sort(Comparator.comparing(Personaje::getSpd).reversed());
+		return spdd.indexOf(s);
+	}
+	public void combate() {
+		while(!isEnd()) {
+			System.out.println("Turno " + (turno+1));
+			turno();
+			estado();
 		}
 	}
-	
 	public void resultado() {
 		if(monstro.getHp()<=0) {
-			//monstro.setHp(0);
 			System.out.println("------\nGanaron los luchadores");		
-		}else if(luchadores_muertos()) {
+		}else if(isDead_luchadores()) {
 			System.out.println("-----\nGano monstruo"); //Si ocurre esto no apareceran los hp de los luchadores porque se borraron por comodidad en el metodo ataque
 		}
 		estado();
 
-	}
-	public void estado() {
-		System.out.println("----------");
-		for (int index=0;index<luchones.cantidadLuchadores();index++) {
-		luchones.mostrarLuchador(index);
-		}
-		System.out.println(monstro.toString());
-		System.out.println("----------");
-	}
 }
+}
+

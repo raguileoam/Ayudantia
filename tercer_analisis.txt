@@ -1,0 +1,8 @@
+---Ayudantía Programación / Aliwen Melillán---
+ -Tercer análisis - Relaciones de herencia-
+Se encontraron dos relaciones de herencia importantes:
+1) Luchador - Personaje
+2) Monstruo - Personaje
+Razones: Luchador y Monstruo compartian atributos en común:los "stats" (excepto el rango) que son propios de algo más global,un personaje de juego.Visto de otro modo, una clase Personaje con sus stats podian especializarse en algo más concreto, los cuales son los luchadores y los monstruos. 
+
+No se identificó a InventarioLuchadores e InventarioObjetos como especializaciones de una posible clase Inventario dado que no aportan mucho al código(solo tienen dos atributos, uno que define la cantidad máxima de un arreglo de clase y el mismo arreglo de clase)

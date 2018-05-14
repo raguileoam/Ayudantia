@@ -5,8 +5,8 @@ import Ayudantia.Luchador;
 public class ObjetoEquipable {
 
 	private int estrella;
-	private int mejora;
 	private String habilidad_mejorada;
+	private int mejora;
 	private String nombre;
 
 	public ObjetoEquipable() {
@@ -26,6 +26,28 @@ public class ObjetoEquipable {
 		this.habilidad_mejorada = " ";
 		this.nombre = " ";
 		azar_caracteristica_y_nombre(caracteristicas, Luchador.random_num(0, caracteristicas[0].length - 1));
+	}
+
+	protected void azar_caracteristica_y_nombre(String[][] caracteristicas, int indice_caracteristicas) { 
+		int indice_random=Luchador.random_num(0, caracteristicas[0].length - 1);
+		this.setHabilidad_mejorada(caracteristicas[0][indice_random]);
+		this.setNombre(caracteristicas[1][indice_random]);
+	}
+	public int getEstrella() {
+		return estrella;
+	}
+	public String getHabilidad_mejorada() {
+		return habilidad_mejorada;
+	}
+	public int getMejora() {
+		return mejora;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void mostrar_caracteristicas() {
+		System.out.println("Mejora base: " + getMejora() + "\n Estrellas: " + getEstrella() + "\n Habilidad mejorada: "
+				+ getHabilidad_mejorada());
 	}
 
 	private int probabilidad_estrella() {
@@ -55,56 +77,20 @@ public class ObjetoEquipable {
 		return local_estrella;
 	}
 
-	protected void azar_caracteristica_y_nombre(String[][] caracteristicas, int indice_caracteristicas) { // aleatoriza
-																											// para
-																											// caracteristica
-																											// mejorada
-																											// junto a
-																											// su
-																											// respectivo
-																											// tipo de
-																											// objeto
-		int indice_random;
-		this.setHabilidad_mejorada(
-				caracteristicas[0][indice_random = Luchador.random_num(0, caracteristicas[0].length - 1)]);
-		this.setNombre(caracteristicas[1][indice_random]);
-	}
-
 	public void setEstrella(int estrella) {
 		this.estrella = estrella;
-	}
-
-	public void setMejora(int mejora) {
-		this.mejora = mejora;
 	}
 
 	public void setHabilidad_mejorada(String habilidad_mejorada) {
 		this.habilidad_mejorada = habilidad_mejorada;
 	}
 
-	public int getEstrella() {
-		return estrella;
-	}
-
-	public int getMejora() {
-		return mejora;
-	}
-
-	public String getHabilidad_mejorada() {
-		return habilidad_mejorada;
-	}
-
-	public String getNombre() {
-		return nombre;
+	public void setMejora(int mejora) {
+		this.mejora = mejora;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public void mostrar_caracteristicas() {
-		System.out.println("Mejora base: " + getMejora() + "\n Estrellas: " + getEstrella() + "\n Habilidad mejorada: "
-				+ getHabilidad_mejorada());
 	}
 
 }
