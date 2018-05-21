@@ -1,4 +1,4 @@
-package Ayudantia;
+ package Ayudantia;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
@@ -42,12 +42,23 @@ public class Batalla {
 			System.out.println("El daño que hagan tus personajes se multiplicará por " +valor);
 		}
 		else if(valor<0){
-			valor=Math.abs(valor);
-			System.out.println("El daño que le hagan a tus personajes se multiplicará por " +valor);
+			System.out.println("El daño que le hagan a tus personajes se multiplicará por " + Math.abs(valor));
 		}	
 		else {
-			valor=1;
 			System.out.println("No hay bonificación de daño ");
+		}
+		return valor;
+	}
+	private double caso_dados(Personaje atacante) {
+		double valor=0;
+		if (atacante instanceof Luchador && ef_dados>0) {
+			valor=ef_dados;
+		}
+		else if(atacante instanceof Monstruo && ef_dados<0) {
+			valor=Math.abs(ef_dados);
+		}
+		else {
+			valor=1;
 		}
 		return valor;
 	}
@@ -66,7 +77,8 @@ public class Batalla {
 		double daño=0;
 		if (atacante.getHp()>0 && atacado.getHp()>0) {
 			daño=atacante.getAtk()*caso_faccion(atacante,atacado)-atacado.getDef();
-			daño=daño*ef_dados;
+			
+			daño=daño*caso_dados(atacante);
 			if(daño<0) {
 				daño=0;
 				System.out.println("No hay daño");
