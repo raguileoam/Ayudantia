@@ -4,8 +4,9 @@ public class Test {
 
     public static void main(String[] args) {
         Batalla d = new Batalla();
-        d.combate();
-        System.out.println(d.resultado());
+        System.out.println(d.combate());
+        GUI_Resultados f=new GUI_Resultados();
+        f.setVisible(true);
 
     }
 }

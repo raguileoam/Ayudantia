@@ -18,7 +18,6 @@ public class Batalla {
         crearLuchadores();
         this.ef_dados = dados();
         this.turno = 0;
-        System.out.println(estado());
     }
 
     private void crearLuchadores() {
@@ -39,14 +38,20 @@ public class Batalla {
         dadito4.lanza_dado(4);
         dadito8.lanza_dado(6);
         double valor = dadito8.getNumero() - dadito4.getNumero();
-        if (valor > 0) {
-            System.out.println("El daño que hagan tus personajes se multiplicará por " + valor);
-        } else if (valor < 0) {
-            System.out.println("El daño que le hagan a tus personajes se multiplicará por " + Math.abs(valor));
-        } else {
-            System.out.println("No hay bonificación de daño ");
-        }
+
         return valor;
+    }
+
+    public String estado_dados(double valor) {
+        String estado;
+        if (valor > 0) {
+            estado = ("El daño que hagan tus personajes se multiplicará por " + valor);
+        } else if (valor < 0) {
+            estado = ("El daño que le hagan a tus personajes se multiplicará por " + Math.abs(valor));
+        } else {
+            estado = ("No hay bonificación de daño ");
+        }
+        return estado;
     }
 
     private double caso_dados(Personaje atacante) {
@@ -72,22 +77,24 @@ public class Batalla {
         return ef_faccion;
     }
 
-    public void ataque(Personaje atacante, Personaje atacado) {
+    private String ataque(Personaje atacante, Personaje atacado) {
         double daño;
+        String estado = "";
         if (atacante.getHp() > 0 && atacado.getHp() > 0) {
             daño = atacante.getAtk() * caso_faccion(atacante, atacado) - atacado.getDef();
 
             daño = daño * caso_dados(atacante);
             if (daño < 0) {
-                System.out.println("No hay daño");
+                estado = String.format("No hay daño de %s hacia %s",atacante.getNombre(),atacado.getNombre());
             } else {
-                System.out.println(atacante.getNombre() + " ha atacado a " + atacado.getNombre() + " dañandolo en " + daño);
+                estado = (atacante.getNombre() + " ha atacado a " + atacado.getNombre() + " dañandolo en " + daño);
                 atacado.setHp(atacado.getHp() - daño);
                 if (atacado.getHp() < 0) {
                     atacado.setHp(0);
                 }
             }
         }
+        return estado;
     }
 
     public boolean isEnd() {
@@ -105,21 +112,26 @@ public class Batalla {
         return boleano;
     }
 
-    public void turno() {
+    public String turno() {
         turno += 1;
+        String estado = "Turno " + turno+"\n";
         for (int ordenSPD = 0; ordenSPD < luchones.cantidadLuchadores() + 1; ordenSPD++) {
             for (int indice = 0; indice < luchones.cantidadLuchadores(); indice++) {
                 if (indiceSPD(luchones.getLuchadores().get(indice)) == ordenSPD) {
-                    ataque(luchones.getLuchadores().get(indice), monstro);
+                    if (luchones.getLuchadores().get(indice).getHp() > 0) {
+                    estado+=ataque(luchones.getLuchadores().get(indice), monstro)+"\n";
                     break;
+                     }
                 } else if (indiceSPD(monstro) == ordenSPD) {
                     if (luchones.getLuchadores().get(indice).getHp() > 0) {
-                        ataque(monstro, luchones.getLuchadores().get(indice));
+                        estado+=ataque(monstro, luchones.getLuchadores().get(indice))+"\n";
                         break;
                     }
+                    
                 }
             }
         }
+        return estado;
     }
 
     public int indiceSPD(Personaje s) {
@@ -131,12 +143,13 @@ public class Batalla {
         return spdd.indexOf(s);
     }
 
-    public void combate() {
+    public String combate() {
+        String estado=estado_dados(ef_dados)+"\n";
         while (!isEnd()) {
-            System.out.println("Turno " + (turno + 1));
-            turno();
-            System.out.println(estado());
+            estado+=estado()+"\n"+turno()+"\n";
         }
+        estado+=resultado()+"\n"+estado()+"\n";
+        return estado;
     }
 
     public String resultado() {
@@ -149,8 +162,24 @@ public class Batalla {
             res += ("Gano monstruo"); //Si ocurre esto no apareceran los hp de los luchadores porque se borraron por comodidad en el metodo ataque
 
         }
-        res += "\n" + estado();
         return res;
 
     }
+
+    public Monstruo getMonstro() {
+        return monstro;
+    }
+
+    public InventarioLuchadores getLuchones() {
+        return luchones;
+    }
+
+    public double getEf_dados() {
+        return ef_dados;
+    }
+
+    public int getTurno() {
+        return turno;
+    }
+    
 }
