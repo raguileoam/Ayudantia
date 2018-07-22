@@ -38,7 +38,6 @@ public class Batalla {
         dadito4.lanza_dado(4);
         dadito8.lanza_dado(6);
         double valor = dadito8.getNumero() - dadito4.getNumero();
-
         return valor;
     }
 
