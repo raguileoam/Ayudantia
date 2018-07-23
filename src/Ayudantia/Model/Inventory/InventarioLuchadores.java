@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class InventarioLuchadores {
 
-    private ArrayList<Luchador> luchadores;
-    private int max_luchadores;
+    protected ArrayList<Luchador> luchadores;
+    protected int max_luchadores;
 
     public InventarioLuchadores() { // Constructor que inicializa la lista de luchadores
         luchadores = new ArrayList<>();
@@ -16,11 +16,21 @@ public class InventarioLuchadores {
     }
 
     public void agregarLuchador() { // Agrega luchador secuencialmente
-        if (luchadores.size() < max_luchadores) { // Limite de luchadores=25
+        if (isComplete()) { // Limite de luchadores=25
             luchadores.add(new Luchador());
         } else {
             System.out.println("Se ha sobrepasado el limite");
         }
+    }
+    public void agregarLuchador(Luchador luchador) { // Agrega luchador secuencialmente
+        if (luchadores.size() < max_luchadores) { // Limite de luchadores=25
+            luchadores.add(luchador);
+        } else {
+            System.out.println("Se ha sobrepasado el limite");
+        }
+    }
+    public boolean isComplete(){
+    return luchadores.size() < max_luchadores;
     }
 
     public int cantidadLuchadores() {

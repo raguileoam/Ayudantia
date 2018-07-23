@@ -69,12 +69,19 @@ public class Tab extends JTable {
         };
         dtm.addColumn("Luchador");
          dtm.addColumn("Selecionado");
-        Object[] obj = new Object[2];
+   Object[] obj = new Object[2];
         for (int i = 0; i < luchones.cantidadLuchadores(); i++) {
             obj[0] = luchones.getLuchadores().get(i);
             obj[1]= new JCheckBox();
             dtm.addRow(obj);
-        }   
+        } 
         return dtm;
+    }
+    DefaultTableModel agregar(DefaultTableModel dtm){
+           Object[] obj = new Object[2];
+           obj[0] = luchones.getLuchadores().get(luchones.cantidadLuchadores()-1);
+           obj[1]= new JCheckBox();
+           dtm.addRow(obj);
+    return dtm;
     }
 }

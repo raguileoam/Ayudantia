@@ -94,19 +94,31 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn_generar) {
+            if(battle.getLuchadores().isComplete()){
             battle.getLuchadores().agregarLuchador();     
-            table.setModel(table.model());
+            table.setModel(table.agregar((DefaultTableModel) table.getModel()));
             System.out.println("Agregado");
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "Se ha sobrepaso el limite", "Se Informa:", JOptionPane.ERROR_MESSAGE);
+
+            }
         } else if (ae.getSource() == btn_select) {
             int row = table.getSelectedRow();
             if (row != -1) {
                 JCheckBox jcb = (JCheckBox) table.getValueAt(row, 1);
                 if (!jcb.isSelected()) {
+                    if(battle.getSeleccionados().isComplete()){
                     jcb.setSelected(true);
                     Luchador aux = (Luchador) table.getValueAt(row, 0);
-                    battle.getSeleccionados().add(aux);
+                    battle.getSeleccionados().agregarLuchador(aux);
                     table.setValueAt(jcb, row, 1);
                     System.out.println("Seleccionado");
+                    }
+                    else {
+                    JOptionPane.showMessageDialog(null, "Se ha sobrepasado el limite", "Se Informa:", JOptionPane.ERROR_MESSAGE);
+                }
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "El luchador ya esta seleccionado", "Se Informa:", JOptionPane.ERROR_MESSAGE);
                 }

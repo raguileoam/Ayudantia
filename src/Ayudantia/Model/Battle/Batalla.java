@@ -4,6 +4,7 @@ import Ayudantia.Model.Inventory.InventarioLuchadores;
 import Ayudantia.Model.Character.Luchador;
 import Ayudantia.Model.Character.Monstruo;
 import Ayudantia.Model.Character.Personaje;
+import Ayudantia.Model.Inventory.Luchadores_Seleccionados;
 import Ayudantia.Model.Util.Dado;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,29 +13,32 @@ import java.util.Random;
 public class Batalla {
     private boolean end;
     private final Monstruo monstro;
-    private final InventarioLuchadores luchadores;
-    private ArrayList<Luchador> seleccionados;
+    private Luchadores_Seleccionados seleccionados;
+    private InventarioLuchadores luchadores;
     private final double ef_dados;
     private int turno;
     
-    public ArrayList<Luchador> getSeleccionados() {
-        return seleccionados;
-    }
-
-    public void setSeleccionados(ArrayList<Luchador> seleccionados) {
-        this.seleccionados = seleccionados;
-    }
+   
 
     public Batalla() {
         this.monstro = new Monstruo();
-        this.luchadores = new InventarioLuchadores();
-        this.seleccionados=new ArrayList<>();
+        this.seleccionados = new Luchadores_Seleccionados();
+        this.luchadores=new InventarioLuchadores();;
         this.ef_dados = dados();
         this.turno = 0;
+}
+
+    public InventarioLuchadores getLuchadores() {
+        return luchadores;
     }
+
+    public void setLuchadores(InventarioLuchadores luchadores) {
+        this.luchadores = luchadores;
+    }
+    
   
     public String estado() {
-        String resultado = String.format("+----------+\n%s\n%s\n+----------+", luchadores.mostrarLuchadores(), monstro);
+        String resultado = String.format("+----------+\n%s\n%s\n+----------+", seleccionados.mostrarLuchadores(), monstro);
         return resultado;
     }
 
@@ -111,8 +115,8 @@ public class Batalla {
 
     private boolean isDead_luchadores() {
         boolean boleano = true;
-        for (int i = 0; i < luchadores.cantidadLuchadores(); i++) {
-            boleano = boleano && luchadores.getLuchadores().get(i).getHp() <= 0;
+        for (int i = 0; i < seleccionados.cantidadLuchadores(); i++) {
+            boleano = boleano && seleccionados.getLuchadores().get(i).getHp() <= 0;
         }
         return boleano;
     }
@@ -120,16 +124,16 @@ public class Batalla {
     public String turno() {
         turno += 1;
         String estado = "Turno " + turno+"\n";
-        for (int ordenSPD = 0; ordenSPD < luchadores.cantidadLuchadores() + 1; ordenSPD++) {
-            for (int indice = 0; indice < luchadores.cantidadLuchadores(); indice++) {
-                if (indiceSPD(luchadores.getLuchadores().get(indice)) == ordenSPD) {
-                    if (luchadores.getLuchadores().get(indice).getHp() > 0) {
-                    estado+=ataque(luchadores.getLuchadores().get(indice), monstro)+"\n";
+        for (int ordenSPD = 0; ordenSPD < seleccionados.cantidadLuchadores() + 1; ordenSPD++) {
+            for (int indice = 0; indice < seleccionados.cantidadLuchadores(); indice++) {
+                if (indiceSPD(seleccionados.getLuchadores().get(indice)) == ordenSPD) {
+                    if (seleccionados.getLuchadores().get(indice).getHp() > 0) {
+                    estado+=ataque(seleccionados.getLuchadores().get(indice), monstro)+"\n";
                     break;
                      }
                 } else if (indiceSPD(monstro) == ordenSPD) {
-                    if (luchadores.getLuchadores().get(indice).getHp() > 0) {
-                        estado+=ataque(monstro, luchadores.getLuchadores().get(indice))+"\n";
+                    if (seleccionados.getLuchadores().get(indice).getHp() > 0) {
+                        estado+=ataque(monstro, seleccionados.getLuchadores().get(indice))+"\n";
                         break;
                     }    
                 }
@@ -141,7 +145,7 @@ public class Batalla {
     public int indiceSPD(Personaje s) {
         ArrayList<Personaje> spdd;
         spdd = new ArrayList<>();
-        spdd.addAll(luchadores.getLuchadores());
+        spdd.addAll(seleccionados.getLuchadores());
         spdd.add(monstro);
         spdd.sort(Comparator.comparing(Personaje::getSpd).reversed());
         return spdd.indexOf(s);
@@ -163,7 +167,7 @@ public class Batalla {
             res += ("\t~\tHUMANS\t~\t\n");
 
         } else if (isDead_luchadores()) {
-            res += ("\t\tMONSTER\t\t\n"); //Si ocurre esto no apareceran los hp de los luchadores porque se borraron por comodidad en el metodo ataque
+            res += ("\t\tMONSTER\t\t\n"); //Si ocurre esto no apareceran los hp de los seleccionados porque se borraron por comodidad en el metodo ataque
 
         }
         res+=("\t~\tWINS\t~\t\n");
@@ -175,8 +179,8 @@ public class Batalla {
         return monstro;
     }
 
-    public InventarioLuchadores getLuchadores() {
-        return luchadores;
+    public InventarioLuchadores getSeleccionados() {
+        return seleccionados;
     }
 
     public double getEf_dados() {

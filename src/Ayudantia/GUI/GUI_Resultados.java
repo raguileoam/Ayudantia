@@ -48,7 +48,7 @@ public class GUI_Resultados extends JFrame implements ActionListener {
 
     public boolean initComponents() {
         btn_next = new JButton("Siguiente");
-        luchador = new JTextArea(battle.getLuchadores().mostrarLuchadores());
+        luchador = new JTextArea(battle.getSeleccionados().mostrarLuchadores());
         turn = new JTextArea(battle.turno());
         monster = new JTextArea(battle.getMonstro().toString());
         btn_exit = new JButton("Salir");
@@ -92,7 +92,7 @@ public class GUI_Resultados extends JFrame implements ActionListener {
         if (ae.getSource() == btn_next) {
             if (!battle.isEnd()) {
                 turn.setText(battle.turno());
-                luchador.setText(battle.getLuchadores().mostrarLuchadores());
+                luchador.setText(battle.getSeleccionados().mostrarLuchadores());
                 monster.setText(battle.getMonstro().toString());
 
                 System.out.println("Actualizado");
