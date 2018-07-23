@@ -1,4 +1,6 @@
-package Ayudantia;
+package Ayudantia.Model.Character;
+
+import Ayudantia.Model.Inventory.ObjetoEquipable;
 
 public class Monstruo extends Personaje {
 

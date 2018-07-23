@@ -1,34 +1,53 @@
-package Ayudantia;
+package Ayudantia.Model.Battle;
 
+import Ayudantia.Model.Inventory.InventarioLuchadores;
+import Ayudantia.Model.Character.Luchador;
+import Ayudantia.Model.Character.Monstruo;
+import Ayudantia.Model.Character.Personaje;
+import Ayudantia.Model.Util.Dado;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
 public class Batalla {
-
     private boolean end;
     private final Monstruo monstro;
-    private final InventarioLuchadores luchones;
+    private final InventarioLuchadores luchadores;
+    private ArrayList<Luchador> seleccionados;
     private final double ef_dados;
     private int turno;
+    
+    public ArrayList<Luchador> getSeleccionados() {
+        return seleccionados;
+    }
 
-    public Batalla() {
+    public void setSeleccionados(ArrayList<Luchador> seleccionados) {
+        this.seleccionados = seleccionados;
+    }
+
+    public Batalla(boolean random) {
         this.monstro = new Monstruo();
-        this.luchones = new InventarioLuchadores();
+        this.luchadores = new InventarioLuchadores();
+        this.seleccionados=new ArrayList<>();
+        if(random){
         crearLuchadores();
+        }
         this.ef_dados = dados();
         this.turno = 0;
     }
 
     private void crearLuchadores() {
-        int num = new Random().nextInt(6); //Se crea uno automaticamente
+       
+    }
+    public void seleccionarLuchadores(){
+          int num = new Random().nextInt(6); //Se crea uno automaticamente
         for (int i = 0; i < num; i++) { //OJO el num luchadores no es lo mismo que el indice del luchador, si el numluchadores es 0 no (se deberia) se crean luchadores
-            luchones.agregarLuchador();
-        }
+            luchadores.agregarLuchador();
+        } 
     }
 
     public String estado() {
-        String resultado = String.format("+----------+\n%s\n%s\n+----------+", luchones.mostrarLuchadores(), monstro);
+        String resultado = String.format("+----------+\n%s\n%s\n+----------+", luchadores.mostrarLuchadores(), monstro);
         return resultado;
     }
 
@@ -44,11 +63,11 @@ public class Batalla {
     public String estado_dados(double valor) {
         String estado;
         if (valor > 0) {
-            estado = ("El daño que hagan tus personajes se multiplicará por " + valor);
+            estado = ("El daño que hagan tus personajes se multiplicara por " + valor);
         } else if (valor < 0) {
-            estado = ("El daño que le hagan a tus personajes se multiplicará por " + Math.abs(valor));
+            estado = ("El daño que le hagan a tus personajes se multiplicara por " + Math.abs(valor));
         } else {
-            estado = ("No hay bonificación de daño ");
+            estado = ("No hay bonificacion");
         }
         return estado;
     }
@@ -105,8 +124,8 @@ public class Batalla {
 
     private boolean isDead_luchadores() {
         boolean boleano = true;
-        for (int i = 0; i < luchones.cantidadLuchadores(); i++) {
-            boleano = boleano && luchones.getLuchadores().get(i).getHp() <= 0;
+        for (int i = 0; i < luchadores.cantidadLuchadores(); i++) {
+            boleano = boleano && luchadores.getLuchadores().get(i).getHp() <= 0;
         }
         return boleano;
     }
@@ -114,19 +133,18 @@ public class Batalla {
     public String turno() {
         turno += 1;
         String estado = "Turno " + turno+"\n";
-        for (int ordenSPD = 0; ordenSPD < luchones.cantidadLuchadores() + 1; ordenSPD++) {
-            for (int indice = 0; indice < luchones.cantidadLuchadores(); indice++) {
-                if (indiceSPD(luchones.getLuchadores().get(indice)) == ordenSPD) {
-                    if (luchones.getLuchadores().get(indice).getHp() > 0) {
-                    estado+=ataque(luchones.getLuchadores().get(indice), monstro)+"\n";
+        for (int ordenSPD = 0; ordenSPD < luchadores.cantidadLuchadores() + 1; ordenSPD++) {
+            for (int indice = 0; indice < luchadores.cantidadLuchadores(); indice++) {
+                if (indiceSPD(luchadores.getLuchadores().get(indice)) == ordenSPD) {
+                    if (luchadores.getLuchadores().get(indice).getHp() > 0) {
+                    estado+=ataque(luchadores.getLuchadores().get(indice), monstro)+"\n";
                     break;
                      }
                 } else if (indiceSPD(monstro) == ordenSPD) {
-                    if (luchones.getLuchadores().get(indice).getHp() > 0) {
-                        estado+=ataque(monstro, luchones.getLuchadores().get(indice))+"\n";
+                    if (luchadores.getLuchadores().get(indice).getHp() > 0) {
+                        estado+=ataque(monstro, luchadores.getLuchadores().get(indice))+"\n";
                         break;
-                    }
-                    
+                    }    
                 }
             }
         }
@@ -136,7 +154,7 @@ public class Batalla {
     public int indiceSPD(Personaje s) {
         ArrayList<Personaje> spdd;
         spdd = new ArrayList<>();
-        spdd.addAll(luchones.getLuchadores());
+        spdd.addAll(luchadores.getLuchadores());
         spdd.add(monstro);
         spdd.sort(Comparator.comparing(Personaje::getSpd).reversed());
         return spdd.indexOf(s);
@@ -153,14 +171,15 @@ public class Batalla {
 
     public String resultado() {
         String res;
-        res = "------FINAL------\n";
+        res = "\t~\tFINAL\t~\t\n";
         if (monstro.getHp() <= 0) {
-            res += ("Ganaron los luchadores");
+            res += ("\t~\tHUMANS\t~\t\n");
 
         } else if (isDead_luchadores()) {
-            res += ("Gano monstruo"); //Si ocurre esto no apareceran los hp de los luchadores porque se borraron por comodidad en el metodo ataque
+            res += ("\t\tMONSTER\t\t\n"); //Si ocurre esto no apareceran los hp de los luchadores porque se borraron por comodidad en el metodo ataque
 
         }
+        res+=("\t~\tWINS\t~\t\n");
         return res;
 
     }
@@ -169,8 +188,8 @@ public class Batalla {
         return monstro;
     }
 
-    public InventarioLuchadores getLuchones() {
-        return luchones;
+    public InventarioLuchadores getLuchadores() {
+        return luchadores;
     }
 
     public double getEf_dados() {

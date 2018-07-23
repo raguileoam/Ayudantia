@@ -1,4 +1,6 @@
-package Ayudantia;
+package Ayudantia.Model.Util;
+
+import Ayudantia.Model.Character.Luchador;
 
 public class Dado {
 

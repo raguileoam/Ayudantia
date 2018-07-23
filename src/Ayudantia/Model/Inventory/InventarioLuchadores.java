@@ -1,5 +1,6 @@
-package Ayudantia;
+package Ayudantia.Model.Inventory;
 
+import Ayudantia.Model.Character.Luchador;
 import java.util.ArrayList;
 
 public class InventarioLuchadores {

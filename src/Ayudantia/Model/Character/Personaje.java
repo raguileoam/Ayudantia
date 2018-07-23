@@ -1,4 +1,4 @@
-package Ayudantia;
+package Ayudantia.Model.Character;
 
 import java.util.Random;
 

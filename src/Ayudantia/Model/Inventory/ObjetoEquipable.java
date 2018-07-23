@@ -1,4 +1,6 @@
-package Ayudantia;
+package Ayudantia.Model.Inventory;
+
+import Ayudantia.Model.Character.Luchador;
 
 public class ObjetoEquipable {
 

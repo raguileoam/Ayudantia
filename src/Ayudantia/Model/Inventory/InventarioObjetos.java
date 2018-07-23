@@ -1,4 +1,4 @@
-package Ayudantia;
+package Ayudantia.Model.Inventory;
 
 import java.util.ArrayList;
 

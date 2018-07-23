@@ -1,5 +1,6 @@
-package Ayudantia;
+package Ayudantia.Model.Character;
 
+import Ayudantia.Model.Inventory.ObjetoEquipable;
 import java.util.Random;
 
 public class Luchador extends Personaje {
@@ -55,8 +56,8 @@ public class Luchador extends Personaje {
 
     @Override
     public String toString() { // Muestra estadisticas
-        return (getNombre() + "\tRango:" + getRango() + "\tHP:" + getHp() + "\tATK:" + getAtk()
-                + "\tDEF:" + getDef() + "\tSPD:" + getSpd() + "\tFaccion:" + getFaccion());
+        return (getNombre() + "  Rango:" + getRango() + "  HP:" + getHp() + "  ATK:" + getAtk()
+                + "  DEF:" + getDef() + "  SPD:" + getSpd() + "  Faccion:" + getFaccion());
     }
 
     private void probabilidad_rango() { // Devuelve numero aleatorio segun probabilidad
@@ -85,9 +86,8 @@ public class Luchador extends Personaje {
     }
 
     private String randomNombre() { // genera nombre aleatorio a partir de String[]
-        String[] nombres = {"Rambo", "Rocky", "J.Cena", "Luchin", "Vega", "Ryu", "Ken", "Goku", "Mario", "Luigi",
-            "Putin", "Java", "Python", "Chapulin"};
-        String nombre_generado = nombres[new Random().nextInt(nombres.length)];
+        Nombre_Personaje[] nombres=Nombre_Personaje.values();
+        String nombre_generado = nombres[new Random().nextInt(nombres.length)].name();
         return nombre_generado;
     }
 
