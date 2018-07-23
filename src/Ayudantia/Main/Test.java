@@ -1,8 +1,6 @@
 package Ayudantia.Main;
 
 import Ayudantia.GUI.GUI_Ingreso;
-import Ayudantia.GUI.GUI_Resultados;
-import Ayudantia.Model.Character.Nombre_Personaje;
 
 public class Test {
 

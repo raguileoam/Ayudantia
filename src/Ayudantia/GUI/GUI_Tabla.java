@@ -15,12 +15,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author raguileoam
  */
-public class Tab extends JTable {
+public class GUI_Tabla extends JTable {
 
     private InventarioLuchadores luchones;
     Font texto = new Font("Agency FB", Font.BOLD, 18);
 
-    public Tab(InventarioLuchadores luchones) {
+    public GUI_Tabla(InventarioLuchadores luchones) {
         super();
         this.luchones = luchones;
         initComponents();
@@ -48,40 +48,49 @@ public class Tab extends JTable {
                         hasFocus, row, column); //To change body of generated methods, choose Tools | Templates.
             }
         };
-    d.setOpaque(false);
-    setDefaultRenderer(Object.class, d);   
+        d.setOpaque(false);
+        setDefaultRenderer(Object.class, d);
     }
-    
 
     public DefaultTableModel model() {
-        DefaultTableModel dtm = new DefaultTableModel(){
-        @Override
-        public Class getColumnClass(int column) {
+        boolean[] canEdit;
+        canEdit = new boolean[]{false, false};
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public Class getColumnClass(int column) {
                 switch (column) {
-                     case 0:
+                    case 0:
                         return String.class;
-                     case 1:
+                    case 1:
                         return JCheckBox.class;
-                     default:
-                         return Object.class;
+                    default:
+                        return Object.class;
                 }
             }
+
+            @Override
+            public boolean isCellEditable(int i, int i1) {
+                return canEdit[i1]; //To change body of generated methods, choose Tools | Templates.
+            }
+
         };
         dtm.addColumn("Luchador");
-         dtm.addColumn("Selecionado");
-   Object[] obj = new Object[2];
+        dtm.addColumn("Selecionado");
+
+        Object[] obj = new Object[2];
         for (int i = 0; i < luchones.cantidadLuchadores(); i++) {
             obj[0] = luchones.getLuchadores().get(i);
-            obj[1]= new JCheckBox();
+            obj[1] = new JCheckBox();
             dtm.addRow(obj);
-        } 
+        }
         return dtm;
     }
-    DefaultTableModel agregar(DefaultTableModel dtm){
-           Object[] obj = new Object[2];
-           obj[0] = luchones.getLuchadores().get(luchones.cantidadLuchadores()-1);
-           obj[1]= new JCheckBox();
-           dtm.addRow(obj);
-    return dtm;
+
+    DefaultTableModel agregar(DefaultTableModel dtm) {
+        Object[] obj = new Object[2];
+        obj[0] = luchones.getLuchadores().get(luchones.cantidadLuchadores() - 1);
+        obj[1] = new JCheckBox();
+        dtm.addRow(obj);
+        return dtm;
     }
 }

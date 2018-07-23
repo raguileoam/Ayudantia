@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.CheckBox;
 import javax.imageio.ImageIO;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -35,12 +37,12 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
     private JButton btn_generar;
     private JButton btn_select;
     private JButton btn_luchar;
-    private Tab table;
+    private GUI_Tabla table;
     private Batalla battle;
     private JPanel botones;
     private final Font titulo = new Font("Agency FB", Font.BOLD, 30);
 
-    public GUI_Ingreso() {
+    public GUI_Ingreso(){
         super();
         battle = new Batalla();
         initWindow();
@@ -58,7 +60,7 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
     }
 
     public void initComponents() {
-        table = new Tab(battle.getLuchadores());
+        table = new GUI_Tabla(battle.getLuchadores());
         t_titulo = new JLabel("~ Generar Personajes ~ Seleccione un luchador");
         t_titulo.setOpaque(false);
         t_titulo.setForeground(Color.WHITE);
@@ -69,7 +71,7 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
         btn_luchar = new JButton("Luchar");
     }
 
-    public void initWindow() {
+    public void initWindow(){
         this.setTitle("Ingreso");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(950, 750);
@@ -78,12 +80,17 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
         this.setResizable(false);
     }
 
-    public ImageIcon background() {
+    public ImageIcon background(){
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("bg.jpg"));
+            // condiciones que gatillan la excepción:  Que la imagen no se encuentre
+            // medidas paliativas de la excepción: Buscar el archivo
+            // justificación del tipo de excepción usada: Tiene que ver con los archivos de entrada y salida
+            img = ImageIO.read(new File("images/bg.jpg"));
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getStackTrace();
+            JOptionPane.showMessageDialog(null, "La imagen no se encuentra", "Se Informa:", JOptionPane.ERROR_MESSAGE);
+            img=error(img);
         }
         Image dimg = img.getScaledInstance(this.getWidth() + 20, this.getHeight() + 20,
                 Image.SCALE_SMOOTH);
@@ -91,6 +98,20 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
         return imageIcon;
     }
 
+    private BufferedImage error(BufferedImage img){
+             JFileChooser sele=new JFileChooser("./");
+            if (sele.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION){
+                  try {
+                      img = ImageIO.read(sele.getSelectedFile());
+                  } catch (IOException ex) {
+                      Logger.getLogger(GUI_Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+                  
+             System.out.println(sele.getSelectedFile().getAbsolutePath());
+             
+            }
+            return img;
+    }
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn_generar) {

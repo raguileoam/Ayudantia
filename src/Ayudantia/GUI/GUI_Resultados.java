@@ -77,7 +77,7 @@ public class GUI_Resultados extends JFrame implements ActionListener {
     public ImageIcon background() {
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("bg.jpg"));
+            img = ImageIO.read(new File("images/bg.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,6 +98,7 @@ public class GUI_Resultados extends JFrame implements ActionListener {
                 System.out.println("Actualizado");
             } else {
                 turn.setText(battle.resultado());
+                turn.setForeground(Color.RED);
                 btn_exit.setVisible(true);
                 System.out.println("FINAL");
             }

@@ -8,7 +8,6 @@ import Ayudantia.Model.Inventory.Luchadores_Seleccionados;
 import Ayudantia.Model.Util.Dado;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Random;
 
 public class Batalla {
     private boolean end;
@@ -54,9 +53,9 @@ public class Batalla {
     public String estado_dados(double valor) {
         String estado;
         if (valor > 0) {
-            estado = ("El daÃ±o que hagan tus personajes se multiplicara por " + valor);
+            estado = ("El daño que hagan tus personajes se multiplicara por " + valor);
         } else if (valor < 0) {
-            estado = ("El daÃ±o que le hagan a tus personajes se multiplicara por " + Math.abs(valor));
+            estado = ("El daño que le hagan a tus personajes se multiplicara por " + Math.abs(valor));
         } else {
             estado = ("No hay bonificacion");
         }
@@ -87,17 +86,17 @@ public class Batalla {
     }
 
     private String ataque(Personaje atacante, Personaje atacado) {
-        double daÃ±o;
+        double daño;
         String estado = "";
         if (atacante.getHp() > 0 && atacado.getHp() > 0) {
-            daÃ±o = atacante.getAtk() * caso_faccion(atacante, atacado) - atacado.getDef();
+            daño = atacante.getAtk() * caso_faccion(atacante, atacado) - atacado.getDef();
 
-            daÃ±o = daÃ±o * caso_dados(atacante);
-            if (daÃ±o < 0) {
-                estado = String.format("No hay daÃ±o de %s hacia %s",atacante.getNombre(),atacado.getNombre());
+            daño = daño * caso_dados(atacante);
+            if (daño < 0) {
+                estado = String.format("No hay daño de %s hacia %s",atacante.getNombre(),atacado.getNombre());
             } else {
-                estado = (atacante.getNombre() + " ha atacado a " + atacado.getNombre() + " daÃ±andolo en " + daÃ±o);
-                atacado.setHp(atacado.getHp() - daÃ±o);
+                estado = (atacante.getNombre() + " ha atacado a " + atacado.getNombre() + " dañandolo en " + daño);
+                atacado.setHp(atacado.getHp() - daño);
                 if (atacado.getHp() < 0) {
                     atacado.setHp(0);
                 }
