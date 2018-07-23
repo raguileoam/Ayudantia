@@ -16,7 +16,7 @@ public class InventarioLuchadores {
     }
 
     public void agregarLuchador() { // Agrega luchador secuencialmente
-        if (luchadores.size() <= max_luchadores) { // Limite de luchadores=25
+        if (luchadores.size() < max_luchadores) { // Limite de luchadores=25
             luchadores.add(new Luchador());
         } else {
             System.out.println("Se ha sobrepasado el limite");

@@ -23,57 +23,61 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javafx.scene.control.CheckBox;
 import javax.imageio.ImageIO;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class GUI_Ingreso extends JFrame implements ActionListener {
-    
+
     private JLabel t_titulo;
-    private JTextArea luchadores;
     private JButton btn_generar;
     private JButton btn_select;
+    private JButton btn_luchar;
     private Tab table;
     private Batalla battle;
-    private JPanel j;
-    Font titulo = new Font("Agency FB", Font.BOLD, 30);
-    
+    private JPanel botones;
+    private final Font titulo = new Font("Agency FB", Font.BOLD, 30);
 
-    
     public GUI_Ingreso() {
         super();
-        battle=new Batalla(false);
+        battle = new Batalla();
         initWindow();
         initComponents();
-        this.add(t_titulo,BorderLayout.NORTH);
-        this.add(table,BorderLayout.CENTER);
-        j.add(btn_generar);
-        j.add(btn_select);
-        j.setOpaque(false);
-        this.add(j,BorderLayout.SOUTH);
+        this.add(t_titulo, BorderLayout.NORTH);
+        this.add(table, BorderLayout.CENTER);
+        botones.add(btn_generar);
+        botones.add(btn_select);
+        botones.add(btn_luchar);
+        botones.setOpaque(false);
+        this.add(botones, BorderLayout.SOUTH);
         btn_generar.addActionListener(this);
         btn_select.addActionListener(this);
+        btn_luchar.addActionListener(this);
     }
-  
-    
+
     public void initComponents() {
-        table=new Tab(battle.getLuchadores());
+        table = new Tab(battle.getLuchadores());
         t_titulo = new JLabel("~ Generar Personajes ~ Seleccione un luchador");
         t_titulo.setOpaque(false);
         t_titulo.setForeground(Color.WHITE);
         t_titulo.setFont(titulo);
-        j=new JPanel(new FlowLayout());
-        btn_generar=new JButton("Generar luchador");
-        btn_select=new JButton("Luchar");     
+        botones = new JPanel(new FlowLayout());
+        btn_generar = new JButton("Generar luchador");
+        btn_select = new JButton("Seleccionar luchador");
+        btn_luchar = new JButton("Luchar");
     }
-    
+
     public void initWindow() {
         this.setTitle("Ingreso");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(950, 850);
+        this.setSize(950, 750);
         this.setContentPane(new JLabel(background()));
         this.setLayout(new BorderLayout());
+        this.setResizable(false);
     }
-    
+
     public ImageIcon background() {
         BufferedImage img = null;
         try {
@@ -89,17 +93,29 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource()==btn_generar){
-            battle.getLuchadores().agregarLuchador();
+        if (ae.getSource() == btn_generar) {
+            battle.getLuchadores().agregarLuchador();     
             table.setModel(table.model());
             System.out.println("Agregado");
-        }
-        else if(ae.getSource()==btn_select){
-            if(table.getSelectedRow()!=-1){
-              Luchador aux=(Luchador) table.getValueAt(table.getSelectedRow(), 0);
-              battle.getSeleccionados().add(aux);
-              System.out.println("Seleccionado");
+        } else if (ae.getSource() == btn_select) {
+            int row = table.getSelectedRow();
+            if (row != -1) {
+                JCheckBox jcb = (JCheckBox) table.getValueAt(row, 1);
+                if (!jcb.isSelected()) {
+                    jcb.setSelected(true);
+                    Luchador aux = (Luchador) table.getValueAt(row, 0);
+                    battle.getSeleccionados().add(aux);
+                    table.setValueAt(jcb, row, 1);
+                    System.out.println("Seleccionado");
+                } else {
+                    JOptionPane.showMessageDialog(null, "El luchador ya esta seleccionado", "Se Informa:", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        } 
+
+        } else if (ae.getSource() == btn_luchar) {
+            GUI_Resultados resultado = new GUI_Resultados(battle);
+            this.setVisible(false);
+            resultado.setVisible(true); 
+        }
     }
 }

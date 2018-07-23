@@ -31,9 +31,10 @@ public class GUI_Resultados extends JFrame implements ActionListener {
 
     public GUI_Resultados(Batalla battle) {
         super();
+         this.battle=battle;
         initWindow();
         initComponents();
-        this.battle=battle;
+       
         add(luchador);
         add(turn);
         add(monster);

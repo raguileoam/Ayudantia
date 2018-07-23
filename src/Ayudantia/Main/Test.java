@@ -9,8 +9,5 @@ public class Test {
     public static void main(String[] args) {
         GUI_Ingreso f=new GUI_Ingreso();
         f.setVisible(true);
-        
-        Nombre_Personaje[] d = Nombre_Personaje.values();
-        System.out.print(d[0]);
     }
 }

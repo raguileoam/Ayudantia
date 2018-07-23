@@ -25,27 +25,14 @@ public class Batalla {
         this.seleccionados = seleccionados;
     }
 
-    public Batalla(boolean random) {
+    public Batalla() {
         this.monstro = new Monstruo();
         this.luchadores = new InventarioLuchadores();
         this.seleccionados=new ArrayList<>();
-        if(random){
-        crearLuchadores();
-        }
         this.ef_dados = dados();
         this.turno = 0;
     }
-
-    private void crearLuchadores() {
-       
-    }
-    public void seleccionarLuchadores(){
-          int num = new Random().nextInt(6); //Se crea uno automaticamente
-        for (int i = 0; i < num; i++) { //OJO el num luchadores no es lo mismo que el indice del luchador, si el numluchadores es 0 no (se deberia) se crean luchadores
-            luchadores.agregarLuchador();
-        } 
-    }
-
+  
     public String estado() {
         String resultado = String.format("+----------+\n%s\n%s\n+----------+", luchadores.mostrarLuchadores(), monstro);
         return resultado;
