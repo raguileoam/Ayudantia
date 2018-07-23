@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Ayudantia/src/Ayudantia/GUI_Resultados.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Ayudantia/src/Ayudantia/GUI_Ingreso.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Ayudantia/src/Ayudantia/GUI/GUI_Resultados.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Ayudantia/src/Ayudantia/Model/Util/Sound.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Ayudantia/src/Ayudantia/Main/Test.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Ayudantia/src/Ayudantia/GUI/GUI_Ingreso.java</file>
         </group>
     </open-files>
 </project-private>

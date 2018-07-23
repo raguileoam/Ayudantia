@@ -11,6 +11,7 @@ package Ayudantia.GUI;
  */
 import Ayudantia.Model.Battle.Batalla;
 import Ayudantia.Model.Character.Luchador;
+import Ayudantia.Model.Util.Sound;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -26,7 +27,14 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.CheckBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -42,7 +50,7 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
     private JPanel botones;
     private final Font titulo = new Font("Agency FB", Font.BOLD, 30);
 
-    public GUI_Ingreso(){
+    public GUI_Ingreso() {
         super();
         battle = new Batalla();
         initWindow();
@@ -71,7 +79,7 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
         btn_luchar = new JButton("Luchar");
     }
 
-    public void initWindow(){
+    public void initWindow() {
         this.setTitle("Ingreso");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(950, 750);
@@ -80,7 +88,7 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
         this.setResizable(false);
     }
 
-    public ImageIcon background(){
+    public ImageIcon background() {
         BufferedImage img = null;
         try {
             // condiciones que gatillan la excepción:  Que la imagen no se encuentre
@@ -90,7 +98,7 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
         } catch (IOException e) {
             e.getStackTrace();
             JOptionPane.showMessageDialog(null, "La imagen no se encuentra", "Se Informa:", JOptionPane.ERROR_MESSAGE);
-            img=error(img);
+            img = error(img);
         }
         Image dimg = img.getScaledInstance(this.getWidth() + 20, this.getHeight() + 20,
                 Image.SCALE_SMOOTH);
@@ -98,30 +106,31 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
         return imageIcon;
     }
 
-    private BufferedImage error(BufferedImage img){
-             JFileChooser sele=new JFileChooser("./");
-            if (sele.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION){
-                  try {
-                      img = ImageIO.read(sele.getSelectedFile());
-                  } catch (IOException ex) {
-                      Logger.getLogger(GUI_Ingreso.class.getName()).log(Level.SEVERE, null, ex);
-                  }
-                  
-             System.out.println(sele.getSelectedFile().getAbsolutePath());
-             
+    private BufferedImage error(BufferedImage img) {
+        JFileChooser sele = new JFileChooser("./");
+        if (sele.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
+            try {
+                img = ImageIO.read(sele.getSelectedFile());
+            } catch (IOException ex) {
+                Logger.getLogger(GUI_Ingreso.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return img;
+
+            System.out.println(sele.getSelectedFile().getAbsolutePath());
+
+        }
+        return img;
     }
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn_generar) {
-            if(battle.getLuchadores().isComplete()){
-            battle.getLuchadores().agregarLuchador();     
-            table.setModel(table.agregar((DefaultTableModel) table.getModel()));
-            System.out.println("Agregado");
-            }
-            else{
-               JOptionPane.showMessageDialog(null, "Se ha sobrepaso el limite", "Se Informa:", JOptionPane.ERROR_MESSAGE);
+            if (battle.getLuchadores().isComplete()) {
+                battle.getLuchadores().agregarLuchador();
+                table.setModel(table.agregar((DefaultTableModel) table.getModel()));
+                Sound.play("attackwarning");
+                System.out.println("Agregado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Se ha sobrepaso el limite", "Se Informa:", JOptionPane.ERROR_MESSAGE);
 
             }
         } else if (ae.getSource() == btn_select) {
@@ -129,26 +138,29 @@ public class GUI_Ingreso extends JFrame implements ActionListener {
             if (row != -1) {
                 JCheckBox jcb = (JCheckBox) table.getValueAt(row, 1);
                 if (!jcb.isSelected()) {
-                    if(battle.getSeleccionados().isComplete()){
-                    jcb.setSelected(true);
-                    Luchador aux = (Luchador) table.getValueAt(row, 0);
-                    battle.getSeleccionados().agregarLuchador(aux);
-                    table.setValueAt(jcb, row, 1);
-                    System.out.println("Seleccionado");
+                    if (battle.getSeleccionados().isComplete()) {
+                        jcb.setSelected(true);
+                        Luchador aux = (Luchador) table.getValueAt(row, 0);
+                        battle.getSeleccionados().agregarLuchador(aux);
+                        table.setValueAt(jcb, row, 1);
+                        Sound.play("steelsword");
+                        System.out.println("Seleccionado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Se ha sobrepasado el limite", "Se Informa:", JOptionPane.ERROR_MESSAGE);
                     }
-                    else {
-                    JOptionPane.showMessageDialog(null, "Se ha sobrepasado el limite", "Se Informa:", JOptionPane.ERROR_MESSAGE);
-                }
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(null, "El luchador ya esta seleccionado", "Se Informa:", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
         } else if (ae.getSource() == btn_luchar) {
+            Sound.play("m_okay");     
             GUI_Resultados resultado = new GUI_Resultados(battle);
             this.setVisible(false);
-            resultado.setVisible(true); 
+            resultado.setVisible(true);
+
+            
         }
     }
 }
